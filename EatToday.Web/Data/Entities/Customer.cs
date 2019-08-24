@@ -32,6 +32,12 @@ namespace EatToday.Web.Data.Entities
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Address { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<RateRecipe> RateRecipes { get; set; }
+
+        public ICollection<FavouriteRecipe> FavouriteRecipes { get; set; }
+
         public string FullName => $"{FirstName} {LastName}";
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";

@@ -9,10 +9,24 @@ namespace EatToday.Web.Data
 {
     public class DataContext : DbContext
     {
-            public DataContext(DbContextOptions<DataContext> options) : base(options)
-            {
-            }
-            public DbSet<Customer> Customers { get; set; }
-  
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<RateRecipe> RateRecipes { get; set; }
+
+        public DbSet<FavouriteRecipe> FavouriteRecipes { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
+
+        public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+
+        public DbSet<RecipeType> RecipeTypes { get; set; }
+
     }
 }
