@@ -1,4 +1,5 @@
 ﻿using EatToday.Web.Data.Entities;
+using EatToday.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,54 @@ namespace EatToday.Web.Data
     public class SeedDB
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public SeedDB(DataContext dataContext)
+        public SeedDB(
+            DataContext context,
+            IUserHelper userHelper)
         {
-            _context = dataContext;
+            _context = context;
+            _userHelper = userHelper;
         }
 
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
+            await CheckRoles();
+            var manager = await CheckUserAsync("Juan", "Martínez", "juanmartinez1712@gmail.com", "310 409 9129", "Calle Luna Calle Sol", "Admin");
+            var customer = await CheckUserAsync("Juan", "Martinez", "juan.a.martinez33@hotmail.com", "310 409 9129", "Calle Luna Calle Sol", "Customer");
             await CheckIngredientsAsync();
             await CheckRecipeTypesAsync();
+            await CheckCustomerAsync(customer);
+            await CheckManagerAsync(manager);
+        }
+
+        private async Task CheckRoles()
+        {
+            await _userHelper.CheckRoleAsync("Admin");
+            await _userHelper.CheckRoleAsync("Customer");
+        }
+
+        private async Task<User> CheckUserAsync(string firstName, string lastName, string email, string phone, string address, string role)
+        {
+            var user = await _userHelper.GetUserByEmailAsync(email);
+            if (user == null)
+            {
+                user = new User
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    UserName = email,
+                    PhoneNumber = phone,
+                    Address = address,
+                };
+
+                await _userHelper.AddUserAsync(user, "123456");
+                await _userHelper.AddUserToRoleAsync(user, role);
+            }
+
+            return user;
         }
 
         private async Task CheckRecipeTypesAsync()
@@ -48,109 +86,120 @@ namespace EatToday.Web.Data
                 await _context.SaveChangesAsync();
             }
         }
-        /*
-        private async Task CheckPetsAsync()
+
+        private async Task CheckCustomerAsync(User user)
         {
-            var owner = _context.Owners.FirstOrDefault();
-            var petType = _context.PetTypes.FirstOrDefault();
-            if (!_context.Pets.Any())
+            if (!_context.Customers.Any())
             {
-                AddPet("Otto", owner, petType, "Shih tzu");
-                AddPet("Killer", owner, petType, "Dobermann");
+                _context.Customers.Add(new Customer { User = user });
                 await _context.SaveChangesAsync();
             }
         }
 
-        private async Task CheckServiceTypesAsync()
+        private async Task CheckManagerAsync(User user)
         {
-            if (!_context.ServiceTypes.Any())
+            if (!_context.Managers.Any())
             {
-                _context.ServiceTypes.Add(new ServiceType { Name = "Consulta" });
-                _context.ServiceTypes.Add(new ServiceType { Name = "Urgencia" });
-                _context.ServiceTypes.Add(new ServiceType { Name = "Vacunación" });
+                _context.Managers.Add(new Manager { User = user });
                 await _context.SaveChangesAsync();
             }
         }
 
-        private async Task CheckPetTypesAsync()
-        {
-            if (!_context.PetTypes.Any())
-            {
-                _context.PetTypes.Add(new PetType { Name = "Perro" });
-                _context.PetTypes.Add(new PetType { Name = "Geto" });
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        private async Task CheckOwnersAsync()
-        {
-            if (!_context.Owners.Any())
-            {
-                AddOwner("8989898", "Juan", "Zuluaga", "234 3232", "310 322 3221", "Calle Luna Calle Sol");
-                AddOwner("7655544", "Jose", "Cardona", "343 3226", "300 322 3221", "Calle 77 #22 21");
-                AddOwner("6565555", "Maria", "López", "450 4332", "350 322 3221", "Carrera 56 #22 21");
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        private void AddOwner(string document, string firstName, string lastName, string fixedPhone, string cellPhone, string address)
-        {
-            _context.Owners.Add(new Owner
-            {
-                Address = address,
-                CellPhone = cellPhone,
-                Document = document,
-                FirstName = firstName,
-                FixedPhone = fixedPhone,
-                LastName = lastName
-            });
-        }
-
-        private void AddPet(string name, Owner owner, PetType petType, string race)
-        {
-            _context.Pets.Add(new Pet
-            {
-                Born = DateTime.Now.AddYears(-2),
-                Name = name,
-                Owner = owner,
-                PetType = petType,
-                Race = race
-            });
-        }
-
-        private async Task CheckAgendasAsync()
-        {
-            if (!_context.Agendas.Any())
-            {
-                var initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
-                var finalDate = initialDate.AddYears(1);
-                while (initialDate < finalDate)
-                {
-                    if (initialDate.DayOfWeek != DayOfWeek.Sunday)
-                    {
-                        var finalDate2 = initialDate.AddHours(10);
-                        while (initialDate < finalDate2)
-                        {
-                            _context.Agendas.Add(new Agenda
-                            {
-                                Date = initialDate.ToUniversalTime(),
-                                IsAvailable = true
-                            });
-
-                            initialDate = initialDate.AddMinutes(30);
-                        }
-
-                        initialDate = initialDate.AddHours(14);
-                    }
-                    else
-                    {
-                        initialDate = initialDate.AddDays(1);
-                    }
-                }
-
-                await _context.SaveChangesAsync();
-            }
-        }
-        */
     }
+
+
+    //public class SeedDB
+    //{
+    //    private readonly DataContext _context;
+    //    private readonly IUserHelper _userHelper;
+
+    //    public SeedDB(DataContext dataContext, IUserHelper userHelper)
+    //    {
+    //        _context = dataContext;
+    //        _userHelper = userHelper;
+    //    }
+
+    //    public async Task SeedAsync()
+    //    {
+    //        await _context.Database.EnsureCreatedAsync();
+    //        await CheckRoles();
+    //        var manager = await CheckUserAsync("Juan", "Martinez", "juanmartinez1712@gmail.com", "3104099129", "Calle Luna Calle Sol", "Admin");
+    //        var customer = await CheckUserAsync("Juan", "Martinez", "juan.a.martinez33@outlook .com", "3104099129", "Calle Luna Calle Sol", "Customer");
+    //        await CheckIngredientsAsync();
+    //        await CheckRecipeTypesAsync();
+    //        await CheckOwnerAsync(customer);
+    //        await CheckManagerAsync(manager);
+
+    //    }
+
+    //    private async Task CheckRecipeTypesAsync()
+    //    {
+    //        if (!_context.RecipeTypes.Any())
+    //        {
+    //            _context.RecipeTypes.Add(new RecipeType { Name = "Sopa" });
+    //            _context.RecipeTypes.Add(new RecipeType { Name = "Pasta" });
+    //            _context.RecipeTypes.Add(new RecipeType { Name = "Ensalada" });
+    //            await _context.SaveChangesAsync();
+    //        }
+    //    }
+
+    //    private async Task CheckIngredientsAsync()
+    //    {
+    //        if (!_context.Ingredients.Any())
+    //        {
+    //            _context.Ingredients.Add(new Ingredient { Name = "Arroz" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Tomate" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Spaguetti" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Lechuga" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Leche" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Cebolla" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Crema de leche" });
+    //            _context.Ingredients.Add(new Ingredient { Name = "Queso parmesano" });
+    //            await _context.SaveChangesAsync();
+    //        }
+    //    }
+    //    private async Task CheckRoles()
+    //    {
+    //        await _userHelper.CheckRoleAsync("Admin");
+    //        await _userHelper.CheckRoleAsync("Customer");
+    //    }
+    //    private async Task<User> CheckUserAsync(string firstName, string lastName, string email, string phone, string address, string role)
+    //    {
+    //        var user = await _userHelper.GetUserByEmailAsync(email);
+    //        if (user == null)
+    //        {
+    //            user = new User
+    //            {
+    //                FirstName = firstName,
+    //                LastName = lastName,
+    //                Email = email,
+    //                UserName = email,
+    //                PhoneNumber = phone,
+    //                Address = address,
+    //            };
+
+    //            await _userHelper.AddUserAsync(user, "123456");
+    //            await _userHelper.AddUserToRoleAsync(user, role);
+    //        }
+
+    //        return user;
+    //    }
+    //    private async Task CheckOwnerAsync(User user)
+    //    {
+    //        if (!_context.Customers.Any())
+    //        {
+    //            _context.Customers.Add(new Customer { User = user });
+    //            await _context.SaveChangesAsync();
+    //        }
+    //    }
+
+    //    private async Task CheckManagerAsync(User user)
+    //    {
+    //        if (!_context.Managers.Any())
+    //        {
+    //            _context.Managers.Add(new Manager { User = user });
+    //            await _context.SaveChangesAsync();
+    //        }
+    //    }
+    //}
 }
