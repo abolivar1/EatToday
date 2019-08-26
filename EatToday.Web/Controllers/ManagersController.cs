@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EatToday.Web.Data;
 using EatToday.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EatToday.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManagersController : Controller
     {
         private readonly DataContext _context;
