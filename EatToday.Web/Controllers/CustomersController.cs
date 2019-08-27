@@ -1,13 +1,14 @@
-﻿using System;
+﻿using EatToday.Web.Data;
+using EatToday.Web.Data.Entities;
+using EatToday.Web.Helpers;
+using EatToday.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using EatToday.Web.Data;
-using EatToday.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace EatToday.Web.Controllers
 {
@@ -15,10 +16,12 @@ namespace EatToday.Web.Controllers
     public class CustomersController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public CustomersController(DataContext context)
+        public CustomersController(DataContext context, IUserHelper userHelper)
         {
             _context = context;
+            _userHelper = userHelper;
         }
 
         // GET: Customers
@@ -39,6 +42,9 @@ namespace EatToday.Web.Controllers
             }
 
             var customer = await _context.Customers
+                .Include(c => c.User)
+                .Include(c => c.FavouriteRecipes)
+                .ThenInclude(c => c.Recipe)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -55,19 +61,54 @@ namespace EatToday.Web.Controllers
         }
 
         // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Customer customer)
+        public async Task<IActionResult> Create(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new User
+                {
+                    Address = model.Address,
+                    Email = model.Username,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber,
+                    UserName = model.Username
+
+                };
+                var response = await _userHelper.AddUserAsync(user, model.Password);
+                if (response.Succeeded)
+                {
+                    var userInDB = await _userHelper.GetUserByEmailAsync(model.Username);
+                    await _userHelper.AddUserToRoleAsync(userInDB, "Customer");
+
+                    var customer = new Customer
+                    {
+                        Comments = new List<Comment>(),
+                        RateRecipes = new List<RateRecipe>(),
+                        FavouriteRecipes = new List<FavouriteRecipe>(),
+                        User = userInDB
+
+                    };
+                    _context.Customers.Add(customer);
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (Exception ex)
+                    {
+
+                        ModelState.AddModelError(string.Empty, ex.ToString());
+                        return View(model);
+                    }
+                }
+
+                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
+
             }
-            return View(customer);
+            return View(model);
         }
 
         // GET: Customers/Edit/5
