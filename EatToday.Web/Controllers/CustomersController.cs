@@ -22,9 +22,12 @@ namespace EatToday.Web.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(_context.Customers
+                .Include(c => c.User)
+                .Include(c => c.FavouriteRecipes)
+                .ThenInclude(c => c.Recipe));
         }
 
         // GET: Customers/Details/5
