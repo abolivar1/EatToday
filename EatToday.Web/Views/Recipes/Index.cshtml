@@ -19,12 +19,26 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Instructions)
+                @Html.DisplayNameFor(model => model.RecipeType.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
-            <th></th>
+            <th>
+                Ingredients
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instructions)
+            </th>
+            <th>
+                # Comments
+            </th>
+            <th>
+                Rate Recipe
+            </th>
+            <th>
+                # Favorite Recipes
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,15 +51,33 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.RecipeType.Name)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                }
+            </td>
+            <td>
+                Ingredients
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Instructions)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @Html.DisplayFor(modelItem => item.Comments.Count)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.RateRecipes.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteRecipes.Count)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

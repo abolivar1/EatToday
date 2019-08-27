@@ -35,8 +35,12 @@ namespace EatToday.Web.Controllers
         // GET: Recipes
         public IActionResult Index()
         {
-            return View(_context.Recipes);
-            // TODO: include para listar las recetas
+            return View(_context.Recipes
+                .Include(rt => rt.RecipeType)
+                .Include(c => c.Comments)
+                .Include(r => r.RateRecipes)
+                .Include(f => f.FavouriteRecipes));
+            // TODO: sacar los ingredientes
         }
 
         // GET: Recipes/Details/5
