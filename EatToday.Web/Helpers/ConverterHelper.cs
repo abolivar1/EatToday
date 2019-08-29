@@ -32,5 +32,16 @@ namespace EatToday.Web.Helpers
                 Instructions = model.Instructions,
             };
         }
+
+        public async Task<RecipeIngredient> ToIngredientAsync(IngredientViewModel model, bool isNew)
+        {
+            return new RecipeIngredient
+            {
+                Id = isNew ? 0 : model.Id,
+                Amount = model.Amount,
+                Ingredient = await _dataContext.Ingredients.FindAsync(model.IngredientId),
+                Recipe = await _dataContext.Recipes.FindAsync(model.RecipeId),
+            };
+        }
     }
 }

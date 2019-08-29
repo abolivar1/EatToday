@@ -7,5 +7,8 @@ namespace EatToday.Web.Helpers
     public interface IConverterHelper
     {
         Task<Recipe> ToRecipeAsync(RecipeViewModel model, string path);
+
+        Task<RecipeIngredient> ToIngredientAsync(IngredientViewModel model, bool isNew);
+
     }
 }

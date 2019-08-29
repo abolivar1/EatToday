@@ -10,6 +10,7 @@ using EatToday.Web.Data.Entities;
 using EatToday.Web.Models;
 using EatToday.Web.Helpers;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace EatToday.Web.Controllers
 {
@@ -19,17 +20,20 @@ namespace EatToday.Web.Controllers
         private readonly IUserHelper _userHelper;
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
         public RecipesController(
             DataContext context,
             IUserHelper userHelper,
             ICombosHelper combosHelper,
-            IConverterHelper converterHelper)
+            IConverterHelper converterHelper,
+            IImageHelper imageHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
         }
 
         // GET: Recipes
@@ -39,7 +43,9 @@ namespace EatToday.Web.Controllers
                 .Include(rt => rt.RecipeType)
                 .Include(c => c.Comments)
                 .Include(r => r.RateRecipes)
-                .Include(f => f.FavouriteRecipes));
+                .Include(f => f.FavouriteRecipes)
+                .Include(ri => ri.RecipeIngredients)
+                .ThenInclude(i => i.Ingredient));
             // TODO: sacar los ingredientes
         }
 
@@ -52,6 +58,12 @@ namespace EatToday.Web.Controllers
             }
 
             var recipe = await _context.Recipes
+                .Include(rt => rt.RecipeType)
+                .Include(c => c.Comments)
+                .Include(r => r.RateRecipes)
+                .Include(f => f.FavouriteRecipes)
+                .Include(ri => ri.RecipeIngredients)
+                .ThenInclude(i => i.Ingredient)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recipe == null)
             {
@@ -68,7 +80,6 @@ namespace EatToday.Web.Controllers
             var model = new RecipeViewModel
             {
                 RecipeTypes = _combosHelper.GetComboRecipeTypes(),
-                Ingredients = _combosHelper.GetComboIngredients(),
             };
             return View(model);
         }
@@ -76,7 +87,7 @@ namespace EatToday.Web.Controllers
         // POST: Recipes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(RecipeViewModel model)
+        public async Task<IActionResult> Create(RecipeViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -84,20 +95,8 @@ namespace EatToday.Web.Controllers
 
                 if (model.ImageFile != null)
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    var file = $"{guid}.jpg";
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
 
-                    path = Path.Combine(
-                        Directory.GetCurrentDirectory(),
-                        "wwwroot\\images\\Recipes",
-                        file);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(stream);
-                    }
-
-                    path =  $"~/images/Recipes/{file}";
                 }
 
                 var recipe =  await _converterHelper.ToRecipeAsync(model, path);
@@ -106,6 +105,7 @@ namespace EatToday.Web.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
+            model.RecipeTypes = _combosHelper.GetComboRecipeTypes();
             return View(model);
         }
 
@@ -192,6 +192,46 @@ namespace EatToday.Web.Controllers
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
+        }
+        
+        
+        //GET: Add ingredients
+        [HttpGet]
+        public async Task<IActionResult> AddIngredient(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var recipe = await _context.Recipes.FindAsync(id.Value);
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            var model = new IngredientViewModel
+            {
+                RecipeId = recipe.Id,
+                Ingredients = _combosHelper.GetComboIngredients()
+            };
+
+            return View(model);
+        }
+        //POST: Add ingredients
+        [HttpPost]
+        public async Task<IActionResult> AddIngredient(IngredientViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                var ingredient = await _converterHelper.ToIngredientAsync(model, true);
+                _context.RecipeIngredients.Add(ingredient);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(AddIngredient));
+            }
+
+            model.Ingredients = _combosHelper.GetComboIngredients();
+            return View(model);
         }
     }
 }
