@@ -117,47 +117,81 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes
+                .Include(rt => rt.RecipeType)
+                .FirstOrDefaultAsync(r => r.Id == id);
             if (recipe == null)
             {
                 return NotFound();
             }
-            return View(recipe);
+            return View(_converterHelper.ToRecipeViewModel(recipe));
         }
 
-        // POST: Recipes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Instructions,ImageUrl")] Recipe recipe)
+        //GET: Edit Ingredient on one recipe
+        public async Task<IActionResult> EditIngredient(int? id)
         {
-            if (id != recipe.Id)
+            if (id == null)
             {
                 return NotFound();
             }
 
+            var RecipeIngredients = await _context.RecipeIngredients
+                .Include(r => r.Recipe)
+                .Include(i => i.Ingredient)
+                .FirstOrDefaultAsync(r => r.Id == id);
+            if (RecipeIngredients == null)
+            {
+                return NotFound();
+            }
+            return View(_converterHelper.ToIngredientViewModel(RecipeIngredients));
+        }
+
+        // POST: Recipes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(RecipeViewModel model)
+        {
+
             if (ModelState.IsValid)
             {
-                try
+
+                var path = model.ImageUrl;
+
+                if (model.ImageFile != null)
                 {
-                    _context.Update(recipe);
-                    await _context.SaveChangesAsync();
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
+
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RecipeExists(recipe.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+                var recipe = await _converterHelper.ToRecipeAsync(model, path);
+                _context.Recipes.Update(recipe);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(recipe);
+
+
+            model.RecipeTypes = _combosHelper.GetComboRecipeTypes();
+            return View(model);
+        }
+
+        // POST: Edit Ingredient one recipe
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditIngredient(IngredientViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                var recipeIngredient = await _converterHelper.ToIngredientAsync(model, false);
+                _context.RecipeIngredients.Update(recipeIngredient);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.RecipeId}");
+            }
+
+
+            model.Ingredients = _combosHelper.GetComboIngredients();
+            return View(model);
         }
 
         // GET: Recipes/Delete/5

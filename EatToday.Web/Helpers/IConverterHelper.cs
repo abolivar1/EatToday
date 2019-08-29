@@ -8,7 +8,11 @@ namespace EatToday.Web.Helpers
     {
         Task<Recipe> ToRecipeAsync(RecipeViewModel model, string path);
 
+        RecipeViewModel ToRecipeViewModel(Recipe recipe);
+
         Task<RecipeIngredient> ToIngredientAsync(IngredientViewModel model, bool isNew);
+
+        IngredientViewModel ToIngredientViewModel(RecipeIngredient ingredient);
 
     }
 }

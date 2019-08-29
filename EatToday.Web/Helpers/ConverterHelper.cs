@@ -11,10 +11,14 @@ namespace EatToday.Web.Helpers
     public class ConverterHelper : IConverterHelper
     {
         private readonly DataContext _dataContext;
+        private readonly ICombosHelper _combosHelper;
 
-        public ConverterHelper(DataContext dataContext)
+        public ConverterHelper(
+            DataContext dataContext,
+            ICombosHelper combosHelper)
         {
             _dataContext = dataContext;
+            _combosHelper = combosHelper;
         }
         public async Task<Recipe> ToRecipeAsync(RecipeViewModel model, string path)
         {
@@ -33,6 +37,25 @@ namespace EatToday.Web.Helpers
             };
         }
 
+        public RecipeViewModel ToRecipeViewModel(Recipe recipe)
+        {
+            return new RecipeViewModel
+            {
+                Comments = recipe.Comments,
+                RateRecipes = recipe.RateRecipes,
+                FavouriteRecipes = recipe.FavouriteRecipes,
+                RecipeIngredients = recipe.RecipeIngredients,
+                Id = recipe.Id,
+                ImageUrl = recipe.ImageUrl,
+                Name = recipe.Name,
+                RecipeType = recipe.RecipeType,
+                Description = recipe.Description,
+                Instructions = recipe.Instructions,
+                RecipeTypeId = recipe.RecipeType.Id,
+                RecipeTypes = _combosHelper.GetComboRecipeTypes(),
+            };
+        }
+
         public async Task<RecipeIngredient> ToIngredientAsync(IngredientViewModel model, bool isNew)
         {
             return new RecipeIngredient
@@ -41,6 +64,22 @@ namespace EatToday.Web.Helpers
                 Amount = model.Amount,
                 Ingredient = await _dataContext.Ingredients.FindAsync(model.IngredientId),
                 Recipe = await _dataContext.Recipes.FindAsync(model.RecipeId),
+            };
+        }
+
+        public IngredientViewModel ToIngredientViewModel(RecipeIngredient ingredient)
+        {
+            return new IngredientViewModel
+            {
+
+                Id = ingredient.Id,
+                Amount = ingredient.Amount,
+                Ingredient = ingredient.Ingredient,
+                Recipe = ingredient.Recipe,
+                Ingredients = _combosHelper.GetComboIngredients(),
+                IngredientId = ingredient.Ingredient.Id,
+                RecipeId = ingredient.Recipe.Id,
+
             };
         }
     }
