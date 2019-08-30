@@ -186,7 +186,7 @@ namespace EatToday.Web.Controllers
                 var recipeIngredient = await _converterHelper.ToIngredientAsync(model, false);
                 _context.RecipeIngredients.Update(recipeIngredient);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.RecipeId}");
+                return RedirectToAction($"Details/{model.Id}");
             }
 
 
@@ -194,8 +194,28 @@ namespace EatToday.Web.Controllers
             return View(model);
         }
 
-        // GET: Recipes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> DeleteIngredient(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var recipeIngredient = await _context.RecipeIngredients
+                .Include(h => h.Ingredient)
+                .Include(h => h.Recipe)
+                .FirstOrDefaultAsync(h => h.Id == id.Value);
+            if (recipeIngredient == null)
+            {
+                return NotFound();
+            }
+
+            _context.RecipeIngredients.Remove(recipeIngredient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"{nameof(Details)}/{recipeIngredient.Recipe.Id}");
+        }
+
+        public async Task<IActionResult> DeleteRecipe(int? id)
         {
             if (id == null)
             {
@@ -203,32 +223,28 @@ namespace EatToday.Web.Controllers
             }
 
             var recipe = await _context.Recipes
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(r => r.Comments)
+                .Include(r => r.RateRecipes)
+                .Include(r => r.FavouriteRecipes)
+                .Include(r => r.RecipeIngredients)
+                .ThenInclude(r => r.Ingredient)
+                .FirstOrDefaultAsync(r => r.Id == id.Value);
             if (recipe == null)
             {
                 return NotFound();
             }
 
-            return View(recipe);
-        }
+            if (recipe.RecipeIngredients.Count > 0)
+            {
+                ModelState.AddModelError(string.Empty, "The recipe can't be deleted because it has related records. ");
+                return RedirectToAction(nameof(Index));
+            }
 
-        // POST: Recipes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var recipe = await _context.Recipes.FindAsync(id);
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RecipeExists(int id)
-        {
-            return _context.Recipes.Any(e => e.Id == id);
-        }
-        
-        
         //GET: Add ingredients
         [HttpGet]
         public async Task<IActionResult> AddIngredient(int? id)

@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Recipe</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Details</h4>
+    <h4>Recipe</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,9 +43,9 @@
         </dt>
         @foreach (var item in Model.RecipeIngredients)
         {
-        <dd>
-           - @Html.DisplayFor(modelItem => item.Amount) @Html.DisplayFor(modelItem => item.Ingredient.Name)
-        </dd>
+            <dd>
+                - @Html.DisplayFor(modelItem => item.Amount) @Html.DisplayFor(modelItem => item.Ingredient.Name)
+            </dd>
         }
         <dt>
             @Html.DisplayNameFor(model => model.Instructions)
@@ -85,35 +85,56 @@
 }
 else
 {
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeIngredients.FirstOrDefault().Ingredient.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeIngredients.FirstOrDefault().Amount)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.RecipeIngredients)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredient.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipeIngredients.FirstOrDefault().Ingredient.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipeIngredients.FirstOrDefault().Amount)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RecipeIngredients)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingredient.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
 
-            <td>
-                <a asp-action="EditIngredient" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                    <td>
+                        <a asp-action="EditIngredient" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
+}
+
+<partial  name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Recipes/DeleteIngredient/' + item_to_delete;
+            });
+        });
+    </script>
 }

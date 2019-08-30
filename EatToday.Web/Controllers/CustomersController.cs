@@ -119,50 +119,48 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (customer == null)
             {
                 return NotFound();
             }
-            return View(customer);
+
+            var model = new EditUserViewModel
+            {
+                Address = customer.User.Address,
+                FirstName = customer.User.FirstName,
+                Id = customer.Id,
+                LastName = customer.User.LastName,
+                PhoneNumber = customer.User.PhoneNumber
+            };
+
+            return View(model);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Customer customer)
+        public async Task<IActionResult> Edit(EditUserViewModel model)
         {
-            if (id != customer.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var customer = await _context.Customers
+                    .Include(o => o.User)
+                    .FirstOrDefaultAsync(o => o.Id == model.Id);
+
+                customer.User.FirstName = model.FirstName;
+                customer.User.LastName = model.LastName;
+                customer.User.Address = model.Address;
+                customer.User.PhoneNumber = model.PhoneNumber;
+
+                await _userHelper.UpdateUserAsync(customer.User);
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+
+            return View(model);
         }
 
-        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,21 +169,17 @@ namespace EatToday.Web.Controllers
             }
 
             var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(r => r.User)
+                .Include(r => r.Comments)
+                .Include(r => r.RateRecipes)
+                .Include(r => r.FavouriteRecipes)
+                .FirstOrDefaultAsync(r => r.Id == id.Value);
             if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
-        }
-
-        // POST: Customers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
+            await _userHelper.DeleteUserAsync(customer.User.Email);
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
