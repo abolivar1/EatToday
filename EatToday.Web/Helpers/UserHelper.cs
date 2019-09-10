@@ -86,5 +86,14 @@ namespace EatToday.Web.Helpers
             return response.Succeeded;
         }
 
+        public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(
+                user,
+                password,
+                false);
+        }
+
+
     }
 }

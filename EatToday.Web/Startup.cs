@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using EatToday.Web.Data;
 using EatToday.Web.Data.Entities;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EatToday.Web
 {
@@ -51,6 +53,17 @@ namespace EatToday.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddAuthentication()
+            .AddCookie()
+            .AddJwtBearer(cfg =>
+            {
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = Configuration["Tokens:Issuer"],
+                    ValidAudience = Configuration["Tokens:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                };
+            });
             services.AddTransient<SeedDB>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();
