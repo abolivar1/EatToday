@@ -14,4 +14,8 @@
     <Folder Include="wwwroot\images\Recipes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EatToday.Common\EatToday.Common.csproj" />
+  </ItemGroup>
+
 </Project>
