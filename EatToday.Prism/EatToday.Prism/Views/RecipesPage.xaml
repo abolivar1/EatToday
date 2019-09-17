@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="EatToday.Prism.Views.RecipesPage"
+             BackgroundColor="Silver"
+             Title="{Binding Title}">
+
+    <StackLayout
+        Padding="10">
+        <ListView
+            SeparatorVisibility="None"
+            HasUnevenRows="True"
+            BackgroundColor="Transparent"
+            ItemsSource="{Binding Recipes}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            HasShadow="True"
+                            CornerRadius="10"
+                            Margin="0,0,0,5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Source="{Binding ImageUrl}"/>
+                                <Label
+                                Grid.Column="0"                          
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                Text="{Binding Name}"/>
+                                <Label
+                                Grid.Column="1"                          
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding RecipeType}"/>
+                                <Label
+                                Grid.Column="0"                                                         
+                                Grid.Row="2"
+                                Text="{Binding Description}"/>
+                                <Image
+                                Grid.Column="2"
+                                Source="ic_launcher"/>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+    </StackLayout>
+</ContentPage>

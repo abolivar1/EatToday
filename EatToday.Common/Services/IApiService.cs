@@ -15,6 +15,13 @@ namespace EatToday.Common.Services
         //    string tokenType,
         //    string accessToken,
         //    string email);
+        Task<Response> GetRecipesByIngredientsAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            string ingredients);
 
         Task<Response> GetTokenAsync(
             string urlBase,

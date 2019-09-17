@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace EatToday.Common.Models
+{
+    public class RecipeRequest
+    {
+        public object Ingredients { get; set; }
+    }
+}

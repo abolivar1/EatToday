@@ -12,13 +12,13 @@
             Text="Email"/>
         <Entry
             Keyboard="Email"
-            Placeholder="Enter your email..."
+            Placeholder="Enter your email."
             Text="{Binding Email}"/>
         <Label
             Text="Password"/>
         <Entry
             IsPassword="True"
-            Placeholder="Enter your password..."
+            Placeholder="Enter your password."
             Text="{Binding Password}"/>
         <ActivityIndicator
             VerticalOptions="CenterAndExpand"

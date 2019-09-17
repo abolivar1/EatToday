@@ -11,6 +11,7 @@ namespace EatToday.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private string _password;
         private bool _isRunning;
@@ -23,7 +24,12 @@ namespace EatToday.Prism.ViewModels
         {
             Title = "Login";
             IsEnabled = true;
+            _navigationService = navigationService;
             _apiService = apiService;
+
+            //TODO: Delete this lines
+            Email = "juanmartinez1712@gmail.com";
+            Password = "123456";
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
@@ -74,13 +80,38 @@ namespace EatToday.Prism.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Email or Password incorrect.", "Accept");
                 Password = string.Empty;
+
+                IsRunning = false;
+                IsEnabled = true;
                 return;
 
             }
+            // TODO: Hacer esto en view model donde se escogen los ingredientes
+            var token = (TokenResponse)response.Result;
+            var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, "" );
+            if (!response2.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
+                Password = string.Empty;
+
+                IsRunning = false;
+                IsEnabled = true;
+                return;
+
+            }
+            var recipe = (RecipeResponse)response2.Result;
+
+            var parameters = new NavigationParameters
+            {
+                { "recipe", recipe }
+            };
+            //TDO: Lo anterior se hizo para avanzar en la visualización.
 
             IsRunning = false;
             IsEnabled = true;
-            await App.Current.MainPage.DisplayAlert("Ok", "Fuck yeahhh!!!", "Accept");
+
+            await _navigationService.NavigateAsync("RecipesPage", parameters);
+            Password = string.Empty;
 
         }
     }

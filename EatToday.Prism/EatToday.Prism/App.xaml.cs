@@ -27,6 +27,7 @@ namespace EatToday.Prism
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<RecipesPage, RecipesPageViewModel>();
         }
     }
 }
