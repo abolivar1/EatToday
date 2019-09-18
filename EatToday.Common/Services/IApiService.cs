@@ -21,7 +21,7 @@ namespace EatToday.Common.Services
             string controller,
             string tokenType,
             string accessToken,
-            string ingredients);
+            int ingredients);
 
         Task<Response> GetTokenAsync(
             string urlBase,

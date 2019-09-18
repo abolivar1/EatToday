@@ -26,7 +26,7 @@ namespace EatToday.Web.Controllers.API
         [HttpPost]
         [Route("GetRecipes")]
         //IngredientsRequest ingredientsRequest
-        public async Task<IActionResult> GetRecipesAsync()
+        public async Task<IActionResult> GetRecipesAsync(RecipeRequest recipeRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace EatToday.Web.Controllers.API
                 .Include(r => r.FavouriteRecipes)
                 .Include(r => r.RecipeIngredients)
                 .ThenInclude(r => r.Ingredient)
-                .FirstOrDefaultAsync(r => r.Id == 1);
+                .FirstOrDefaultAsync(r => r.Id == recipeRequest.Ingredients);
                 //.All(r => r.RecipeIngredients.Count > 0);
                 //.AnyAsync(r => r.RecipeIngredients.Count > 0);
 

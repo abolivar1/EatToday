@@ -12,13 +12,13 @@ namespace EatToday.Prism.ViewModels
     public class RecipesPageViewModel : ViewModelBase
     {
         private  RecipeResponse _recipe;
-        private ObservableCollection<RecipeResponse> _recipes;
+        private ObservableCollection<RecipeItemViewModel> _recipes;
         public RecipesPageViewModel( INavigationService  navigationService) : base(navigationService)
         {
             Title = "Recipes";
         }
 
-        public ObservableCollection<RecipeResponse> Recipes
+        public ObservableCollection<RecipeItemViewModel> Recipes
         {
             get => _recipes;
             set => SetProperty(ref _recipes, value);
@@ -31,8 +31,17 @@ namespace EatToday.Prism.ViewModels
             if (parameters.ContainsKey("recipe"))
             {
                 _recipe = parameters.GetValue<RecipeResponse>("recipe");
-                //var _recipe2 = _recipe as IEnumerable<RecipeResponse>;
-                //Recipes = new ObservableCollection<RecipeResponse>(_recipe);
+                var _recipe2 = new [] { _recipe };
+                Recipes = new ObservableCollection<RecipeItemViewModel>(_recipe2.Select(r => new RecipeItemViewModel
+                {
+                    Name = r.Name,
+                    Description = r.Description,
+                    Instructions = r.Instructions,
+                    ImageUrl = r.ImageUrl,
+                    RecipeType = r.RecipeType,
+                    IngredientRecipes = r.IngredientRecipes,
+                    CommentResponses = r.CommentResponses,
+                }).ToList());
             }
             
         }

@@ -88,7 +88,7 @@ namespace EatToday.Prism.ViewModels
             }
             // TODO: Hacer esto en view model donde se escogen los ingredientes
             var token = (TokenResponse)response.Result;
-            var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, "" );
+            var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, 1 );
             if (!response2.IsSuccess)
             {
                 await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");

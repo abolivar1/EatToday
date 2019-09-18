@@ -62,7 +62,7 @@ namespace EatToday.Common.Services
             string controller,
             string tokenType,
             string accessToken,
-            string ingredients)
+            int ingredients)
         {
             try
             {

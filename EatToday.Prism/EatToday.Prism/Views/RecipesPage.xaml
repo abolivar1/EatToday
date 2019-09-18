@@ -23,35 +23,27 @@
                             Margin="0,0,0,5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                
                                 <Image
-                                Grid.Column="0"
                                 Grid.Row="0"
                                 Source="{Binding ImageUrl}"/>
-                                <Label
-                                Grid.Column="0"                          
+                                <Label                      
                                 Grid.Row="1"
                                 FontAttributes="Bold"
+                                HorizontalOptions="StartAndExpand"                                   
                                 Text="{Binding Name}"/>
-                                <Label
-                                Grid.Column="1"                          
+                                <Label                      
                                 Grid.Row="1"
                                 FontAttributes="Bold"
-                                HorizontalTextAlignment="End"
+                                HorizontalOptions="CenterAndExpand"
                                 Text="{Binding RecipeType}"/>
-                                <Label
-                                Grid.Column="0"                                                         
+                                <Label                                                         
                                 Grid.Row="2"
                                 Text="{Binding Description}"/>
-                                <Image
-                                Grid.Column="2"
-                                Source="ic_launcher"/>
-
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
