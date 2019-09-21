@@ -1,5 +1,8 @@
-﻿using EatToday.Web.Helpers;
+﻿using EatToday.Web.Data;
+using EatToday.Web.Data.Entities;
+using EatToday.Web.Helpers;
 using EatToday.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,11 +20,15 @@ namespace EatToday.Web.Controllers
     {
         private readonly IUserHelper _userHelper;
         private readonly IConfiguration _configuration;
+        private readonly DataContext _dataContext;
 
-        public AccountController(IUserHelper userHelper, IConfiguration configuration)
+        public AccountController(IUserHelper userHelper, 
+            IConfiguration configuration,
+            DataContext dataContext)
         {
             _userHelper = userHelper;
             _configuration = configuration;
+            this._dataContext = dataContext;
         }
 
         [HttpGet]
@@ -103,6 +110,77 @@ namespace EatToday.Web.Controllers
 
             return BadRequest();
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(AddUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await AddUser(model);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "This email is already used.");
+                    return View(model);
+                }
+
+                var customer = new Customer
+                {
+                    Comments = new List<Comment>(),
+                    FavouriteRecipes = new List<FavouriteRecipe>(),
+                    RateRecipes = new List<RateRecipe>(),
+                    User = user,
+                };
+
+                _dataContext.Customers.Add(customer);
+                await _dataContext.SaveChangesAsync();
+
+                var loginViewModel = new LoginViewModel
+                {
+                    Password = model.Password,
+                    RememberMe = false,
+                    Username = model.Username
+                };
+
+                var result2 = await _userHelper.LoginAsync(loginViewModel);
+
+                if (result2.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(model);
+        }
+
+        private async Task<User> AddUser(AddUserViewModel model)
+        {
+            var user = new User
+            {
+                Address = model.Address,
+                Email = model.Username,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
+                UserName = model.Username
+            };
+
+            var result = await _userHelper.AddUserAsync(user, model.Password);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            var newUser = await _userHelper.GetUserByEmailAsync(model.Username);
+            await _userHelper.AddUserToRoleAsync(newUser, "Customer");
+            return newUser;
+        }
+
 
         public IActionResult NotAuthorized()
         {
