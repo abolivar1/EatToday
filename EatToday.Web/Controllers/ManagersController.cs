@@ -8,26 +8,34 @@ using Microsoft.EntityFrameworkCore;
 using EatToday.Web.Data;
 using EatToday.Web.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
+using EatToday.Web.Helpers;
+using EatToday.Web.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EatToday.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class ManagersController : Controller
     {
-        private readonly DataContext _context;
+        private readonly DataContext _dataContext;
+        private readonly IUserHelper _userHelper;
+        private readonly IMailHelper _mailHelper;
 
-        public ManagersController(DataContext context)
+        public ManagersController(
+            DataContext dataContext,
+            IUserHelper userHelper,
+            IMailHelper mailHelper)
         {
-            _context = context;
+            _dataContext = dataContext;
+            _userHelper = userHelper;
+            _mailHelper = mailHelper;
         }
 
-        // GET: Managers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Managers.ToListAsync());
+            return View(_dataContext.Managers.Include(m => m.User));
         }
 
-        // GET: Managers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,8 +43,9 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var manager = await _dataContext.Managers
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (manager == null)
             {
                 return NotFound();
@@ -45,29 +54,69 @@ namespace EatToday.Web.Controllers
             return View(manager);
         }
 
-        // GET: Managers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Managers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Manager manager)
+        public async Task<IActionResult> Create(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(manager);
-                await _context.SaveChangesAsync();
+                var user = await AddUser(model);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "This email is already used.");
+                    return View(model);
+                }
+
+                var manager = new Manager { User = user };
+
+                _dataContext.Managers.Add(manager);
+                await _dataContext.SaveChangesAsync();
+
+                var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                {
+                    userid = user.Id,
+                    token = myToken
+                }, protocol: HttpContext.Request.Scheme);
+
+                _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                    $"To allow the user, " +
+                    $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+
+            return View(model);
         }
 
-        // GET: Managers/Edit/5
+        private async Task<User> AddUser(AddUserViewModel model)
+        {
+            var user = new User
+            {
+                Address = model.Address,
+                Email = model.Username,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
+                UserName = model.Username
+            };
+
+            var result = await _userHelper.AddUserAsync(user, model.Password);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            var newUser = await _userHelper.GetUserByEmailAsync(model.Username);
+            await _userHelper.AddUserToRoleAsync(newUser, "Admin");
+            return newUser;
+        }
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,50 +124,48 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers.FindAsync(id);
+            var manager = await _dataContext.Managers
+                .Include(m => m.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (manager == null)
             {
                 return NotFound();
             }
-            return View(manager);
+
+            var model = new EditUserViewModel
+            {
+                Address = manager.User.Address,
+                FirstName = manager.User.FirstName,
+                Id = manager.Id,
+                LastName = manager.User.LastName,
+                PhoneNumber = manager.User.PhoneNumber
+            };
+
+            return View(model);
         }
 
-        // POST: Managers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Manager manager)
+        public async Task<IActionResult> Edit(EditUserViewModel model)
         {
-            if (id != manager.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(manager);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ManagerExists(manager.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var manager = await _dataContext.Managers
+                    .Include(o => o.User)
+                    .FirstOrDefaultAsync(o => o.Id == model.Id);
+
+                manager.User.FirstName = model.FirstName;
+                manager.User.LastName = model.LastName;
+                manager.User.Address = model.Address;
+                manager.User.PhoneNumber = model.PhoneNumber;
+
+                await _userHelper.UpdateUserAsync(manager.User);
                 return RedirectToAction(nameof(Index));
             }
-            return View(manager);
+
+            return View(model);
         }
 
-        // GET: Managers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +173,23 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            var manager = await _context.Managers
+            var manager = await _dataContext.Managers
+                .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (manager == null)
             {
                 return NotFound();
             }
 
-            return View(manager);
-        }
-
-        // POST: Managers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var manager = await _context.Managers.FindAsync(id);
-            _context.Managers.Remove(manager);
-            await _context.SaveChangesAsync();
+            _dataContext.Managers.Remove(manager);
+            await _userHelper.DeleteUserAsync(manager.User.Email);
+            await _dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ManagerExists(int id)
         {
-            return _context.Managers.Any(e => e.Id == id);
+            return _dataContext.Managers.Any(e => e.Id == id);
         }
     }
 }

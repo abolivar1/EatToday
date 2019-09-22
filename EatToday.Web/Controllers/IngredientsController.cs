@@ -25,23 +25,7 @@ namespace EatToday.Web.Controllers
             return View(await _context.Ingredients.ToListAsync());
         }
 
-        // GET: Ingredients/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ingredient = await _context.Ingredients
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-
-            return View(ingredient);
-        }
+       
 
         // GET: Ingredients/Create
         public IActionResult Create()
