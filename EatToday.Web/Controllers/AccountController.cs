@@ -4,6 +4,7 @@ using EatToday.Web.Helpers;
 using EatToday.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -179,6 +180,50 @@ namespace EatToday.Web.Controllers
             var newUser = await _userHelper.GetUserByEmailAsync(model.Username);
             await _userHelper.AddUserToRoleAsync(newUser, "Customer");
             return newUser;
+        }
+
+        public async Task<IActionResult> ChangeUser()
+        {
+            var Customer = await _dataContext.Customers
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(c => c.User.UserName.ToLower() == User.Identity.Name.ToLower());
+            if (Customer == null)
+            {
+                return NotFound();
+            }
+
+            var model = new EditUserViewModel
+            {
+                Address = Customer.User.Address,
+                FirstName = Customer.User.FirstName,
+                Id = Customer.Id,
+                LastName = Customer.User.LastName,
+                PhoneNumber = Customer.User.PhoneNumber
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUser(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var customer = await _dataContext.Customers
+                    .Include(c => c.User)
+                    .FirstOrDefaultAsync(c => c.Id == model.Id);
+
+                customer.User.FirstName = model.FirstName;
+                customer.User.LastName = model.LastName;
+                customer.User.Address = model.Address;
+                customer.User.PhoneNumber = model.PhoneNumber;
+
+                await _userHelper.UpdateUserAsync(customer.User);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
         }
 
 
