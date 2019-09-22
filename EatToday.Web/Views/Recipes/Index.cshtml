@@ -4,95 +4,108 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeType.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeIngredients.FirstOrDefault().Ingredient.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Instructions)
-            </th>
-            <th>
-                # Comments
-            </th>
-            <th>
-                Rate Recipe
-            </th>
-            <th>
-                # Favorite Recipes
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RecipeType.Name)
-                </td>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.ImageUrl))
-                    {
-                        <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RecipeIngredients.Count)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Instructions)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comments.Count)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RateRecipes.Count)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FavouriteRecipes.Count)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
-                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Delete</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Recipes</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RecipeType.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ImageUrl)
+                            </th>
+                            <th>
+                                # Ingredients
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Instructions)
+                            </th>
+                            <th>
+                                # Comments
+                            </th>
+                            <th>
+                                Rate Recipe
+                            </th>
+                            <th>
+                                # Favorite Recipes
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RecipeType.Name)
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:1000px;height:100px;max-width: 100%;" />
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RecipeIngredients.Count)
+                                </td>
+                                <td>
+                                    <p style="width:200px;height:100px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden">@Html.DisplayFor(modelItem => item.Instructions)</p>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Comments.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RateRecipes.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FavouriteRecipes.Count)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" class="btn btn-default" asp-route-id="@item.Id"><i class="glyphicon glyphicon-pencil"></i> </a>
+                                    <a asp-action="Details" class="btn btn-default" asp-route-id="@item.Id"><i class="glyphicon glyphicon-list"> </i> </a>
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <partial name="_DeleteDialog" />
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
             // Delete item
             var item_to_delete;
 

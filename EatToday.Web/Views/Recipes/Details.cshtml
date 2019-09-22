@@ -44,7 +44,7 @@
         @foreach (var item in Model.RecipeIngredients)
         {
             <dd>
-                - @Html.DisplayFor(modelItem => item.Amount) @Html.DisplayFor(modelItem => item.Ingredient.Name)
+                - @Html.DisplayFor(modelItem => item.Amount) de @Html.DisplayFor(modelItem => item.Ingredient.Name)
             </dd>
         }
         <dt>
@@ -74,8 +74,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="AddIngredient" asp-route-id="@Model.Id" class="btn btn-primary">Add Ingredients</a> |
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |
+    <a asp-action="AddIngredient" asp-route-id="@Model.Id" class="btn btn-primary">Add Ingredients</a>
     <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
 

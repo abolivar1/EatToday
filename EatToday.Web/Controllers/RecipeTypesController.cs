@@ -131,10 +131,12 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            return View(recipeType);
+            _context.RecipeTypes.Remove(recipeType);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: RecipeTypes/Delete/5
+        /* POST: RecipeTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -143,7 +145,7 @@ namespace EatToday.Web.Controllers
             _context.RecipeTypes.Remove(recipeType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
+        }*/
 
         private bool RecipeTypeExists(int id)
         {

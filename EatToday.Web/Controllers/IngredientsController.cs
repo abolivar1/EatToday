@@ -131,20 +131,12 @@ namespace EatToday.Web.Controllers
                 return NotFound();
             }
 
-            return View(ingredient);
-        }
-
-        // POST: Ingredients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var ingredient = await _context.Ingredients.FindAsync(id);
             _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+       
         private bool IngredientExists(int id)
         {
             return _context.Ingredients.Any(e => e.Id == id);
