@@ -24,8 +24,8 @@ namespace EatToday.Web.Data
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckRoles();
-            var manager = await CheckUserAsync("Juan", "Martínez", "juanmartinez1712@gmail.com", "310 409 9129", "Calle Luna Calle Sol", "Admin");
-            var customer = await CheckUserAsync("Juan", "Martinez", "juan.a.martinez33@hotmail.com", "310 409 9129", "Calle Luna Calle Sol", "Customer");
+            var manager = await CheckUserAsync("Alex", "Bolivar", "alex.jhojanx@gmail.com", "310 409 9129", "Calle Luna Calle Sol", "Admin");
+            var customer = await CheckUserAsync("Alex", "Bolivar", "eattoday.app@gmail.com", "310 409 9129", "Calle Luna Calle Sol", "Customer");
             await CheckIngredientsAsync();
             await CheckRecipeTypesAsync();
             await CheckCustomerAsync(customer);
@@ -56,6 +56,9 @@ namespace EatToday.Web.Data
                 await _userHelper.AddUserAsync(user, "123456");
                 await _userHelper.AddUserToRoleAsync(user, role);
             }
+            var token = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+            await _userHelper.ConfirmEmailAsync(user, token);
+
 
             return user;
         }

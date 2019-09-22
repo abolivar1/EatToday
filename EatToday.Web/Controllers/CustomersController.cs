@@ -17,11 +17,15 @@ namespace EatToday.Web.Controllers
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
+        private readonly IMailHelper _mailHelper;
 
-        public CustomersController(DataContext context, IUserHelper userHelper)
+        public CustomersController(DataContext context,
+            IUserHelper userHelper,
+            IMailHelper mailHelper)
         {
             _context = context;
             _userHelper = userHelper;
+            _mailHelper = mailHelper;
         }
 
         // GET: Customers
@@ -95,6 +99,16 @@ namespace EatToday.Web.Controllers
                     try
                     {
                         await _context.SaveChangesAsync();
+                        var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                        var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userid = user.Id,
+                            token = myToken
+                        }, protocol: HttpContext.Request.Scheme);
+
+                        _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                            $"To allow the user, " +
+                            $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
                         return RedirectToAction(nameof(Index));
                     }
                     catch (Exception ex)
