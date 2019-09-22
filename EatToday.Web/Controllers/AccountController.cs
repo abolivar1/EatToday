@@ -188,23 +188,43 @@ namespace EatToday.Web.Controllers
 
         public async Task<IActionResult> ChangeUser()
         {
-            var Customer = await _dataContext.Customers
+            var model= new EditUserViewModel { };
+            if (User.IsInRole("Customer")) {
+                var Customer = await _dataContext.Customers
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(c => c.User.UserName.ToLower() == User.Identity.Name.ToLower());
-            if (Customer == null)
-            {
-                return NotFound();
+                if (Customer == null)
+                {
+                    return NotFound();
+                }
+                model = new EditUserViewModel
+                {
+                    Address = Customer.User.Address,
+                    FirstName = Customer.User.FirstName,
+                    Id = Customer.Id,
+                    LastName = Customer.User.LastName,
+                    PhoneNumber = Customer.User.PhoneNumber
+                };
             }
-
-            var model = new EditUserViewModel
+            else
             {
-                Address = Customer.User.Address,
-                FirstName = Customer.User.FirstName,
-                Id = Customer.Id,
-                LastName = Customer.User.LastName,
-                PhoneNumber = Customer.User.PhoneNumber
-            };
+                var manager = await _dataContext.Managers
+                    .Include(c => c.User)
+                    .FirstOrDefaultAsync(c => c.User.UserName.ToLower() == User.Identity.Name.ToLower());
+                if (manager == null)
+                {
+                    return NotFound();
+                }
 
+                model = new EditUserViewModel
+                {
+                    Address = manager.User.Address,
+                    FirstName = manager.User.FirstName,
+                    Id = manager.Id,
+                    LastName = manager.User.LastName,
+                    PhoneNumber = manager.User.PhoneNumber
+                };
+            }
             return View(model);
         }
 
@@ -214,17 +234,34 @@ namespace EatToday.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var customer = await _dataContext.Customers
-                    .Include(c => c.User)
-                    .FirstOrDefaultAsync(c => c.Id == model.Id);
+                if (User.IsInRole("Customer"))
+                {
+                    var customer = await _dataContext.Customers
+                        .Include(c => c.User)
+                        .FirstOrDefaultAsync(c => c.Id == model.Id);
 
-                customer.User.FirstName = model.FirstName;
-                customer.User.LastName = model.LastName;
-                customer.User.Address = model.Address;
-                customer.User.PhoneNumber = model.PhoneNumber;
+                    customer.User.FirstName = model.FirstName;
+                    customer.User.LastName = model.LastName;
+                    customer.User.Address = model.Address;
+                    customer.User.PhoneNumber = model.PhoneNumber;
 
-                await _userHelper.UpdateUserAsync(customer.User);
-                return RedirectToAction("Index", "Home");
+                    await _userHelper.UpdateUserAsync(customer.User);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    var manager = await _dataContext.Managers
+                        .Include(c => c.User)
+                        .FirstOrDefaultAsync(c => c.Id == model.Id);
+
+                    manager.User.FirstName = model.FirstName;
+                    manager.User.LastName = model.LastName;
+                    manager.User.Address = model.Address;
+                    manager.User.PhoneNumber = model.PhoneNumber;
+
+                    await _userHelper.UpdateUserAsync(manager.User);
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             return View(model);
