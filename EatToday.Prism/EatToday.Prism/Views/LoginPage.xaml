@@ -9,21 +9,34 @@
     <StackLayout
         Padding="10">
         <Label
-            Text="Email"/>
+            TextColor="Orange"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            HorizontalOptions="Center"          
+            Text="User"/>
         <Entry
             Keyboard="Email"
-            Placeholder="Enter your email."
+            Placeholder="Enter your email."    
             Text="{Binding Email}"/>
         <Label
+            TextColor="Orange"
+            FontAttributes="Bold"
+            FontSize="Medium"            
+            HorizontalOptions="Center"
             Text="Password"/>
         <Entry
-            IsPassword="True"
+            IsPassword="True"            
             Placeholder="Enter your password."
             Text="{Binding Password}"/>
         <ActivityIndicator
             VerticalOptions="CenterAndExpand"
             IsRunning="{Binding IsRunning}"/>
         <Button
+            BorderColor="Orange"
+            TextColor="Orange"
+            BackgroundColor="White"
+            BorderWidth="2"
+            BorderRadius="10"
             IsEnabled="{Binding IsEnabled}"
             Command="{Binding LoginCommand}"
             Text="Login"/>

@@ -4,11 +4,10 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.RecipesPage"
-             BackgroundColor="Silver"
+             BackgroundColor="Transparent"
              Title="{Binding Title}">
 
-    <StackLayout
-        Padding="10">
+    <StackLayout>
         <ListView
             SeparatorVisibility="None"
             HasUnevenRows="True"
@@ -18,16 +17,18 @@
                 <DataTemplate>
                     <ViewCell>
                         <Frame
-                            HasShadow="True"
-                            CornerRadius="10"
-                            Margin="0,0,0,5">
+                            HasShadow="True"                         
+                            Margin="0,0,0,7">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectRecipeCommand}"/>
+                            </Frame.GestureRecognizers>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 
                                 <Image
-                                Grid.Row="0"
+                                Grid.Row="0"                  
                                 Source="{Binding ImageUrl}"/>
                                 <Label                      
                                 Grid.Row="1"
@@ -41,10 +42,10 @@
                                 Text="{Binding RecipeType}"/>
                                 <Label                                                         
                                 Grid.Row="2"
+                                Margin="0,0,0,0"
                                 Text="{Binding Description}"/>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>

@@ -20,6 +20,9 @@ namespace EatToday.Prism
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Orange;
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.White;
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -28,6 +31,7 @@ namespace EatToday.Prism
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<RecipesPage, RecipesPageViewModel>();
+            containerRegistry.RegisterForNavigation<RecipePage, RecipePageViewModel>();
         }
     }
 }

@@ -11,11 +11,13 @@ namespace EatToday.Prism.ViewModels
 {
     public class RecipesPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private  RecipeResponse _recipe;
         private ObservableCollection<RecipeItemViewModel> _recipes;
-        public RecipesPageViewModel( INavigationService  navigationService) : base(navigationService)
+        public RecipesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = "Recipes";
+            _navigationService = navigationService;
         }
 
         public ObservableCollection<RecipeItemViewModel> Recipes
@@ -32,7 +34,7 @@ namespace EatToday.Prism.ViewModels
             {
                 _recipe = parameters.GetValue<RecipeResponse>("recipe");
                 var _recipe2 = new [] { _recipe };
-                Recipes = new ObservableCollection<RecipeItemViewModel>(_recipe2.Select(r => new RecipeItemViewModel
+                Recipes = new ObservableCollection<RecipeItemViewModel>(_recipe2.Select(r => new RecipeItemViewModel(_navigationService)
                 {
                     Name = r.Name,
                     Description = r.Description,
@@ -41,6 +43,7 @@ namespace EatToday.Prism.ViewModels
                     RecipeType = r.RecipeType,
                     IngredientRecipes = r.IngredientRecipes,
                     CommentResponses = r.CommentResponses,
+
                 }).ToList());
             }
             
