@@ -2,60 +2,73 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.RecipesPage"
              BackgroundColor="Transparent"
              Title="{Binding Title}">
 
-    <StackLayout>
-        <ListView
+    <ScrollView>
+        <StackLayout>
+            <ListView
             SeparatorVisibility="None"
             HasUnevenRows="True"
             BackgroundColor="Transparent"
             ItemsSource="{Binding Recipes}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame
-                            HasShadow="True"                         
-                            Margin="0,0,0,7">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectRecipeCommand}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <Image
-                                Grid.Row="0"                  
-                                Source="{Binding ImageUrl}"/>
-                                <Label                      
-                                Grid.Row="1"
-                                FontAttributes="Bold"
-                                HorizontalOptions="StartAndExpand"                                   
-                                Text="{Binding Name}"/>
-                                <Label                      
-                                Grid.Row="1"
-                                FontAttributes="Bold"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="{Binding RecipeType}"/>
-                                <Label                                                         
-                                Grid.Row="2"
-                                Margin="0,0,0,0"
-                                Text="{Binding Description}"/>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            
-        </ListView>
-    </StackLayout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                HasShadow="True"                         
+                                Margin="0,0,0,7"
+                                Padding="3,0,3,0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectRecipeCommand}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ffimageloading:CachedImage
+	                                    Grid.Row="0"
+                                        Aspect="AspectFit"
+                                        Margin="0"
+	                                    Source="{Binding ImageUrl}"
+	                                    LoadingPlaceholder= "LoaderImage"
+	                                    ErrorPlaceholder= "ErrorImage"
+	                                    CacheDuration= "50"
+	                                    RetryCount= "3"
+	                                    RetryDelay= "600"
+	                                    DownsampleToViewSize = "true"
+                                        WidthRequest="400"
+                                        HeightRequest="200"/>
+                                    <Label                      
+                                        Grid.Row="1"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="StartAndExpand"                                   
+                                        Text="{Binding Name}"/>
+                                    <Label                      
+                                        Grid.Row="1"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Text="{Binding RecipeType}"/>
+                                    <Label                                                         
+                                        Grid.Row="2"
+                                        Margin="0,0,0,0"
+                                        Text="{Binding Description}"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
