@@ -25,7 +25,7 @@ namespace EatToday.Prism.ViewModels
                 { "recipe", this }
             };
 
-            await _navigationService.NavigateAsync("RecipePage", parameters);
+            await _navigationService.NavigateAsync("IngredientsRecipePage", parameters);
         }
     }
 }

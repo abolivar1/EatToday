@@ -67,13 +67,23 @@ namespace EatToday.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
+            // Validando la conexión
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var connection = await _apiService.CheckConnection(url);
+            if (!connection)
+            {
+                IsEnabled = true;
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                return;
+            }
+
             var request = new TokenRequest
             {
                 Password = Password,
                 Username = Email
             };
 
-            var url = App.Current.Resources["UrlAPI"].ToString();
             var response = await _apiService.GetTokenAsync(url, "/Account", "/CreateToken", request);
 
             if (!response.IsSuccess)
@@ -87,7 +97,7 @@ namespace EatToday.Prism.ViewModels
 
             }
             // TODO: Hacer esto en view model donde se escogen los ingredientes
-            var token = (TokenResponse)response.Result;
+            var token = response.Result;
             var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, 1 );
             if (!response2.IsSuccess)
             {
@@ -99,7 +109,7 @@ namespace EatToday.Prism.ViewModels
                 return;
 
             }
-            var recipe = (RecipeResponse)response2.Result;
+            var recipe = response2.Result;
 
             var parameters = new NavigationParameters
             {

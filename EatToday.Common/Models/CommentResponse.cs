@@ -13,6 +13,7 @@ namespace EatToday.Common.Models
 
         public string Customer { get; set; }
 
+        public DateTime DateLocal => Date.ToLocalTime();
 
     }
 }
