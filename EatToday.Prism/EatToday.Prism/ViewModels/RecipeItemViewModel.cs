@@ -1,4 +1,6 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -20,12 +22,9 @@ namespace EatToday.Prism.ViewModels
 
         private async void SelectRecipe()
         {
-            var parameters = new NavigationParameters
-            {
-                { "recipe", this }
-            };
+            Settings.Recipe = JsonConvert.SerializeObject(this);
 
-            await _navigationService.NavigateAsync("IngredientsRecipePage", parameters);
+            await _navigationService.NavigateAsync("RecipeTabbedPage");
         }
     }
 }

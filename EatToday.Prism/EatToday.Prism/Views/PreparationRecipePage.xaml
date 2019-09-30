@@ -3,21 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="EatToday.Prism.Views.PreparationRecipePage">
+             x:Class="EatToday.Prism.Views.PreparationRecipePage"
+             BackgroundColor="#F5F5F5"
+             Title="{Binding Title}">
     <ScrollView>
         <StackLayout
             Padding="10">
             <Frame
+                BorderColor="#ffddb0"                
                 HasShadow="True"
                 InputTransparent="True">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label
                         Grid.Row="0"
-                        
+                        FontSize="Title"
+                        FontAttributes="Italic"
                         Text="Preparation"/>
                     <Label
                         Grid.Row="1"                       

@@ -1,4 +1,6 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,25 +16,14 @@ namespace EatToday.Prism.ViewModels
 
         public IngredientsRecipePageViewModel(INavigationService navigationService) : base(navigationService)
         {
-
+            Recipe = JsonConvert.DeserializeObject<RecipeResponse>(Settings.Recipe);
+            Title = "Ingredients";
         }
 
         public RecipeResponse Recipe
         {
             get => _recipe;
             set => SetProperty(ref _recipe, value);
-
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("recipe"))
-            {
-                Recipe = parameters.GetValue<RecipeResponse>("recipe");
-                Title = Recipe.Name;
-            }
         }
     }
 }

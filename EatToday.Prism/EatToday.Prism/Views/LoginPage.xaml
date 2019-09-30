@@ -4,10 +4,15 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.LoginPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="Transparent">
 
     <StackLayout
         Padding="10">
+        <Image
+            HeightRequest="200"
+            BackgroundColor="Transparent"
+            Source="login"/>
         <Label
             TextColor="Orange"
             FontAttributes="Bold"

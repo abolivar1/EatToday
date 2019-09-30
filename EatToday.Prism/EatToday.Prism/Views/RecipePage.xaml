@@ -4,7 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="EatToday.Prism.Views.RecipePage">
+             x:Class="EatToday.Prism.Views.RecipePage"
+             Title="{Binding Title}">
 
     <ScrollView>
         <StackLayout
