@@ -6,6 +6,6 @@ namespace EatToday.Common.Models
 {
     public class RecipeRequest
     {
-        public int Ingredients { get; set; }
+        public string Ingredients { get; set; }
     }
 }

@@ -35,42 +35,63 @@ namespace EatToday.Web.Controllers.API
             // TODO: Consulta de acuerdo a los ingredientes que escoga la persona, 
             // por el momento se traeran todas la recetas disponibles
 
-            var recipe = await _dataContext.Recipes
-                .Include(r => r.RecipeType)
-                .Include(r => r.Comments)
-                .Include(r => r.RateRecipes)
-                .Include(r => r.FavouriteRecipes)
-                .Include(r => r.RecipeIngredients)
-                .ThenInclude(r => r.Ingredient)
-                .FirstOrDefaultAsync(r => r.Id == recipeRequest.Ingredients);
-                //.All(r => r.RecipeIngredients.Count > 0);
-                //.AnyAsync(r => r.RecipeIngredients.Count > 0);
+            //var recipe = await _dataContext.Recipes
+            //    .Include(r => r.RecipeType)
+            //    .Include(r => r.Comments)
+            //    .Include(r => r.RateRecipes)
+            //    .Include(r => r.FavouriteRecipes)
+            //    .Include(r => r.RecipeIngredients)
+            //    .ThenInclude(r => r.Ingredient)
+            //    .FirstOrDefaultAsync(r => r.RecipeIngredients.Count > 0);
+            //.ToList();
+            //.All(r => r.RecipeIngredients.Count > 0);
+            //.AnyAsync(r => r.RecipeIngredients.Count > 0);
 
-                //.Any(r => r.RecipeIngredients.Any(ri => ri.Ingredient == ))
+            //.Any(r => r.RecipeIngredients.Any(ri => ri.Ingredient == ))
+            var recipes = await _dataContext.RecipeIngredients
+                .Include(r => r.Recipe)
+                .ThenInclude(r => r.RecipeType)
+                .Include(r => r.Recipe)
+                .ThenInclude(r => r.Comments)
+                .Include(r => r.Recipe)
+                .ThenInclude(r => r.RateRecipes)
+                .Include(r => r.Recipe)
+                .ThenInclude(r => r.FavouriteRecipes)
+                .Include(r => r.Ingredient)
+                .Where(r => r.Ingredient.Name == recipeRequest.Ingredients)
+                .OrderBy(r => r.Recipe.Name)
+                .ToListAsync();
 
-            var response = new RecipeResponse
+
+            var response = new List<RecipeResponse>();
+
+            foreach (var recipe in recipes)
             {
-
-                Id = recipe.Id,
-                Name = recipe.Name,
-                Description = recipe.Description,
-                Instructions = recipe.Instructions,
-                ImageUrl = recipe.ImageFullPath,
-                RecipeType = recipe.RecipeType.Name,
-                IngredientRecipes = recipe.RecipeIngredients.Select(ri => new IngredientRecipeResponse
+                var recipeResponse = new RecipeResponse
                 {
-                    Id = ri.Id,
-                    Amount = ri.Amount,
-                    Ingredient = ri.Ingredient.Name
-                }).ToList(),
-                CommentResponses = recipe.Comments.Select(c => new CommentResponse
-                {
-                    Id = c.Id,
-                    Remarks = c.Remarks,
-                    Date = c.DateLocal,
-                    Customer = c.Customer.User.FullName
-                }).ToList()
 
+                    Id = recipe.Recipe.Id,
+                    Name = recipe.Recipe.Name,
+                    Description = recipe.Recipe.Description,
+                    Instructions = recipe.Recipe.Instructions,
+                    ImageUrl = recipe.Recipe.ImageFullPath,
+                    RecipeType = recipe.Recipe.RecipeType.Name,
+                    IngredientRecipes = recipe.Recipe.RecipeIngredients.Select(ri => new IngredientRecipeResponse
+                    {
+                        Id = ri.Id,
+                        Amount = ri.Amount,
+                        Ingredient = ri.Ingredient.Name
+                    }).ToList(),
+                    CommentResponses = recipe.Recipe.Comments.Select(c => new CommentResponse
+                    {
+                        Id = c.Id,
+                        Remarks = c.Remarks,
+                        Date = c.DateLocal,
+                        Customer = c.Customer.User.FullName
+                    }).ToList()
+                };
+                response.Add(recipeResponse);
+                
             };
             return Ok(response);
         }
