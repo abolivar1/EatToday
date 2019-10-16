@@ -96,7 +96,7 @@ namespace EatToday.Web.Controllers.API
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("GetIngredients")]
         //IngredientsRequest ingredientsRequest
         public IActionResult GetIngredients()
