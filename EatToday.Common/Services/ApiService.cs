@@ -116,55 +116,50 @@ namespace EatToday.Common.Services
             }
         }
 
+        public async Task<Response<IngredientResponse>> GetIngredientsAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken)
+        {
+            try
+            {
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
 
-        //public async Task<Response> GetCustomerByEmail(
-        //    string urlBase,
-        //    string servicePrefix,
-        //    string controller,
-        //    string tokenType,
-        //    string accessToken,
-        //    string email)
-        //{
-        //    try
-        //    {
-        //        var request = new EmailRequest { Email = email };
-        //        var requestString = JsonConvert.SerializeObject(request);
-        //        var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-        //        var client = new HttpClient
-        //        {
-        //            BaseAddress = new Uri(urlBase)
-        //        };
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
 
-        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
-        //        var url = $"{servicePrefix}{controller}";
-        //        var response = await client.PostAsync(url, content);
-        //        var result = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<IngredientResponse>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
 
-        //        if (!response.IsSuccessStatusCode)
-        //        {
-        //            return new Response
-        //            {
-        //                IsSuccess = false,
-        //                Message = result,
-        //            };
-        //        }
-
-        //        var customer = JsonConvert.DeserializeObject<OwnerResponse>(result);
-        //        return new Response
-        //        {
-        //            IsSuccess = true,
-        //            Result = customer
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new Response
-        //        {
-        //            IsSuccess = false,
-        //            Message = ex.Message
-        //        };
-        //    }
-        //}
+                var ingredients = JsonConvert.DeserializeObject<IngredientResponse>(result);
+                return new Response<IngredientResponse>
+                {
+                    IsSuccess = true,
+                    Result = ingredients
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<IngredientResponse>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
     }
 
 }

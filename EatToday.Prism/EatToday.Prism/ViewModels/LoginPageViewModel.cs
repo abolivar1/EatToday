@@ -117,10 +117,30 @@ namespace EatToday.Prism.ViewModels
             };
             //TDO: Lo anterior se hizo para avanzar en la visualización.
 
+
+            //Consumiendo el serivicio de todos los ingredients
+            var response3 = await _apiService.GetIngredientsAsync(url, "/api", "/Recipes/GetIngredients", "bearer", token.Token);
+            if (!response3.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
+                Password = string.Empty;
+
+                IsRunning = false;
+                IsEnabled = true;
+                return;
+
+            }
+            var ingredient = response3.Result;
+
+            var parameters2 = new NavigationParameters
+            {
+                { "ingredient", ingredient }
+            };
+
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("RecipesPage", parameters);
+            await _navigationService.NavigateAsync("ChooseIngredientsPage", parameters2);
             Password = string.Empty;
 
         }
