@@ -130,7 +130,7 @@ namespace EatToday.Prism.ViewModels
                 return;
 
             }
-            var ingredient = response3.Result;
+            var ingredient = response3.ResultList;
 
             var parameters2 = new NavigationParameters
             {

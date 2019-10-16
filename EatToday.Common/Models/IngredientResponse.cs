@@ -8,5 +8,6 @@ namespace EatToday.Common.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<object> RecipeIngredients { get; set; }
     }
 }

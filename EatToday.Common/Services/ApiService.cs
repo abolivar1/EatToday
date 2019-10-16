@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -143,12 +144,11 @@ namespace EatToday.Common.Services
                         Message = result,
                     };
                 }
-
-                var ingredients = JsonConvert.DeserializeObject<IngredientResponse>(result);
+                var ingredients = JsonConvert.DeserializeObject<List<IngredientResponse>>(result);
                 return new Response<IngredientResponse>
                 {
                     IsSuccess = true,
-                    Result = ingredients
+                    ResultList = ingredients
                 };
             }
             catch (Exception ex)
