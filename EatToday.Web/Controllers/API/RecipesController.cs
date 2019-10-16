@@ -95,5 +95,27 @@ namespace EatToday.Web.Controllers.API
             };
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("GetIngredients")]
+        //IngredientsRequest ingredientsRequest
+        public IActionResult GetIngredients()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var ingredients = _dataContext.Ingredients
+                .Where(i => i.Id >= 0)
+                .OrderBy(i => i.Name)
+                .ToList();
+
+            if (ingredients == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ingredients);
+        }
     }
 }
