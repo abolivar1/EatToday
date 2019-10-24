@@ -2,8 +2,57 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.ChooseIngredientsPage"
              Title="{Binding Title}">
-  
+    <ScrollView>
+        <StackLayout
+        Padding="10">
+            <Label
+                HorizontalOptions="FillAndExpand"
+                TextColor="Orange"
+                FontSize="50"
+                Margin="0,0,0,7"
+                Text="Choose the ingredients now, for search the recipes"/>
+            <Label
+                TextColor="Orange"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                Text="Ingredients"/>
+            <autocomplete:SfAutoComplete
+                DisplayMemberPath="Name" 
+                MultiSelectMode="Token"
+                TokensWrapMode="Wrap" 
+                EnableAutoSize="True"
+                MinimumHeightRequest="60"
+                IgnoreDiacritic="False"
+                NoResultsFoundText="No Results Found"                    
+                DataSource="{Binding IngredientsCollection}"
+                SelectedItem="{Binding ItemsSelected}">
+                <autocomplete:SfAutoComplete.TokenSettings>
+                    <autocomplete:TokenSettings
+                        FontSize="16"
+                        BackgroundColor="#A0A603"
+                        TextColor="White"
+                        SelectedBackgroundColor="Orange"
+                        DeleteButtonColor="White"                        
+                        FontFamily="Times New Roman"
+                        DeleteButtonPlacement="Right"
+                        IsCloseButtonVisible="true"
+                        CornerRadius="15"/>
+                </autocomplete:SfAutoComplete.TokenSettings>
+            </autocomplete:SfAutoComplete>
+            <Button
+                BorderColor="Orange"
+                TextColor="Orange"
+                BackgroundColor="White"
+                BorderWidth="2"
+                BorderRadius="10"
+                IsEnabled="{Binding IsEnabled}"
+                Command="{Binding SearchRecipesCommand}"
+                Text="Search Recipes"
+                VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
