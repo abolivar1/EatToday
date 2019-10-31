@@ -1,5 +1,7 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
 using EatToday.Common.Services;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -96,28 +98,10 @@ namespace EatToday.Prism.ViewModels
                 return;
 
             }
-            // TODO: Hacer esto en view model donde se escogen los ingredientes
+            Settings.Token = JsonConvert.SerializeObject(response.Result);
+
             var token = response.Result;
-            //var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, "Tomate" );
-            //if (!response2.IsSuccess)
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
-            //    Password = string.Empty;
-
-            //    IsRunning = false;
-            //    IsEnabled = true;
-            //    return;
-
-            //}
-            //var recipe = response2.Result;
-
-            //var parameters = new NavigationParameters
-            //{
-            //    { "recipe", recipe }
-            //};
-            //TDO: Lo anterior se hizo para avanzar en la visualización.
-
-
+            
             //Consumiendo el serivicio de todos los ingredients
             var response3 = await _apiService.GetIngredientsAsync(url, "/api", "/Recipes/GetIngredients", "bearer", token.Token);
             if (!response3.IsSuccess)

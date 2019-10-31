@@ -14,7 +14,7 @@ namespace EatToday.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private ObservableCollection<IngredientResponse> _ingredients;
         private string _itemSelected;
-        private List<string> _itemsSelected;
+        //private List<string> _itemsSelected;
         public ChooseIngredientsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
@@ -28,7 +28,6 @@ namespace EatToday.Prism.ViewModels
             set
             {
                 _itemSelected = value;
-                this.AddItems(value);
             }
         }
 
@@ -57,11 +56,11 @@ namespace EatToday.Prism.ViewModels
             }            
         }
 
-        private void AddItems(string value)
-        {
-            _itemsSelected.Add(value);
-            Console.WriteLine(value);
-        }
+        //private void AddItems(string value)
+        //{
+        //    _itemsSelected.Add(value);
+        //    Console.WriteLine(value);
+        //}
     }
 }
 

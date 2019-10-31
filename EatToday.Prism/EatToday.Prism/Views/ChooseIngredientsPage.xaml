@@ -21,6 +21,7 @@
                 FontSize="Medium"
                 Text="Ingredients"/>
             <autocomplete:SfAutoComplete
+                x:Name="autoComplete"
                 DisplayMemberPath="Name" 
                 MultiSelectMode="Token"
                 TokensWrapMode="Wrap" 
@@ -29,7 +30,7 @@
                 IgnoreDiacritic="False"
                 NoResultsFoundText="No Results Found"                    
                 DataSource="{Binding IngredientsCollection}"
-                SelectedItem="{Binding ItemsSelected}">
+                SelectionChanged="autoComplete_SelectionChanged">
                 <autocomplete:SfAutoComplete.TokenSettings>
                     <autocomplete:TokenSettings
                         FontSize="16"
@@ -44,15 +45,17 @@
                 </autocomplete:SfAutoComplete.TokenSettings>
             </autocomplete:SfAutoComplete>
             <Button
+                x:Name="searchButton"
                 BorderColor="Orange"
                 TextColor="Orange"
                 BackgroundColor="White"
                 BorderWidth="2"
                 BorderRadius="10"
-                IsEnabled="{Binding IsEnabled}"
-                Command="{Binding SearchRecipesCommand}"
+                IsEnabled="{Binding IsEnabled2}"
+                Command="{Binding SearchRecipesCommand}"                
                 Text="Search Recipes"
-                VerticalOptions="EndAndExpand"/>
+                VerticalOptions="EndAndExpand"
+                Clicked="searchRecipes"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

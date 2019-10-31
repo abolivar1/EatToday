@@ -17,7 +17,7 @@ namespace EatToday.Prism
 
         protected override async void OnInitialized()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTQ5NzM4QDMxMzcyZTMyMmUzMFNDS0MvRFYwTUJScGpYTjhQeFk4b0RaRzVUMWxCVWpJUjNsbCs4ZkVHWUU9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTY0MzYwQDMxMzcyZTMzMmUzMENmNTlSd1E0MmtLZ1I3RkVrMjF4ZXFXd1haR3lha2Z6RjNuZERhN3pSTVk9");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
