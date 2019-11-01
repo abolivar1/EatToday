@@ -59,30 +59,30 @@ namespace EatToday.Prism.Views
         {
 
 
-            await DisplayAlert("Error", "You must enter an email.", "Accept");
+            //await DisplayAlert("Error", "You must enter an email." + Ingredients[0] , "Accept");
 
-            //if (Ingredients == null)
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
-            //    return;
-            //}
+            if (Ingredients.Count == 0)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "You must enter an ingredient.", "Accept");
+                return;
+            }
 
             //IsRunning = true;
-            //IsEnabled = false;
+            IsEnabled2 = false;
 
-            //var url = App.Current.Resources["UrlAPI"].ToString();
-            //var connection = await _apiService.CheckConnection(url);
-            //if (!connection)
-            //{
-            //    IsEnabled = true;
-            //    IsRunning = false;
-            //    await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
-            //    return;
-            //}
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var connection = await _apiService.CheckConnection(url);
+            if (!connection)
+            {
+                IsEnabled2 = true;
+                //IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                return;
+            }
 
-            //var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
-            //var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, "Tomate");
+            //var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, Ingredients);
             //if (!response2.IsSuccess)
             //{
             //    await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");

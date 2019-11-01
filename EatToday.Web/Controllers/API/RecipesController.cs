@@ -35,14 +35,16 @@ namespace EatToday.Web.Controllers.API
             // TODO: Consulta de acuerdo a los ingredientes que escoga la persona, 
             // por el momento se traeran todas la recetas disponibles
 
-            //var recipe = await _dataContext.Recipes
+            //var recipes = await _dataContext.Recipes
             //    .Include(r => r.RecipeType)
             //    .Include(r => r.Comments)
             //    .Include(r => r.RateRecipes)
             //    .Include(r => r.FavouriteRecipes)
             //    .Include(r => r.RecipeIngredients)
             //    .ThenInclude(r => r.Ingredient)
-            //    .FirstOrDefaultAsync(r => r.RecipeIngredients.Count > 0);
+            //    .Where(r => r.RecipeIngredients.Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients.ToString())))
+            //    .OrderBy(r => r.Recipe.Name)
+                //.ToListAsync();
             //.ToList();
             //.All(r => r.RecipeIngredients.Count > 0);
             //.AnyAsync(r => r.RecipeIngredients.Count > 0);
@@ -58,7 +60,7 @@ namespace EatToday.Web.Controllers.API
                 .Include(r => r.Recipe)
                 .ThenInclude(r => r.FavouriteRecipes)
                 .Include(r => r.Ingredient)
-                .Where(r => r.Ingredient.Name == recipeRequest.Ingredients)
+                .Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients.ToString()))
                 .OrderBy(r => r.Recipe.Name)
                 .ToListAsync();
 

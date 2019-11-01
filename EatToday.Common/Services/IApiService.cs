@@ -21,7 +21,7 @@ namespace EatToday.Common.Services
             string controller,
             string tokenType,
             string accessToken,
-            string ingredients);
+            List<string> ingredients);
         Task<Response<IngredientResponse>> GetIngredientsAsync(
             string urlBase,
             string servicePrefix,
