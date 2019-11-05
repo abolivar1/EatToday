@@ -35,6 +35,9 @@ namespace EatToday.Prism
             containerRegistry.RegisterForNavigation<PreparationRecipePage, PreparationRecipePageViewModel>();
             containerRegistry.RegisterForNavigation<RecipeTabbedPage, RecipeTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<ChooseIngredientsPage, ChooseIngredientsPageViewModel>();
+            containerRegistry.RegisterForNavigation<EatTodayMasterDetailPage, EatTodayMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
+            containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
         }
     }
 }
