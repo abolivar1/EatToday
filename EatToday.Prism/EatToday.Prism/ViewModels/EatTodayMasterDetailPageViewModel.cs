@@ -34,7 +34,7 @@ namespace EatToday.Prism.ViewModels
                 new Menu
                 {
                     Icon = "ic_search",
-                    PageName = "RecipePage",
+                    PageName = "ChooseIngredientsPage",
                     Title = "Search Recipes"
                 },
 

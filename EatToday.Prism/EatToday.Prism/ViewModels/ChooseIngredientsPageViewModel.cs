@@ -1,4 +1,6 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -19,6 +21,7 @@ namespace EatToday.Prism.ViewModels
         {
             _navigationService = navigationService;
             Title = "Choose Ingredients";
+            LoadIngredients();
         }
 
         public string ItemsSelected
@@ -39,28 +42,19 @@ namespace EatToday.Prism.ViewModels
             set => SetProperty(ref _ingredients, value);
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        
+
+        private void LoadIngredients()
         {
-            base.OnNavigatingTo(parameters);
+            var _ingredients = JsonConvert.DeserializeObject<List<IngredientResponse>>(Settings.Ingredients);
 
-            if (parameters.ContainsKey("ingredient"))
+            IngredientsCollection = new ObservableCollection<IngredientResponse>(_ingredients.Select(r => new IngredientResponse()
             {
-                var ingredients = parameters.GetValue<List<IngredientResponse>>("ingredient");
+                Id = r.Id,
+                Name = r.Name,
 
-                IngredientsCollection = new ObservableCollection<IngredientResponse>(ingredients.Select(r => new IngredientResponse()
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-
-                }).ToList());
-            }            
+            }).ToList());
         }
-
-        //private void AddItems(string value)
-        //{
-        //    _itemsSelected.Add(value);
-        //    Console.WriteLine(value);
-        //}
     }
 }
 

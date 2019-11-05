@@ -42,9 +42,9 @@ namespace EatToday.Web.Controllers.API
             //    .Include(r => r.FavouriteRecipes)
             //    .Include(r => r.RecipeIngredients)
             //    .ThenInclude(r => r.Ingredient)
-            //    .Where(r => r.RecipeIngredients.Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients.ToString())))
+            //    .Where(r => r.RecipeIngredients.Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients[0])))
             //    .OrderBy(r => r.Recipe.Name)
-                //.ToListAsync();
+            //    .ToListAsync();
             //.ToList();
             //.All(r => r.RecipeIngredients.Count > 0);
             //.AnyAsync(r => r.RecipeIngredients.Count > 0);
@@ -60,9 +60,11 @@ namespace EatToday.Web.Controllers.API
                 .Include(r => r.Recipe)
                 .ThenInclude(r => r.FavouriteRecipes)
                 .Include(r => r.Ingredient)
-                .Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients.ToString()))
+                .Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients[0]))
                 .OrderBy(r => r.Recipe.Name)
                 .ToListAsync();
+
+
 
 
             var response = new List<RecipeResponse>();
@@ -80,6 +82,7 @@ namespace EatToday.Web.Controllers.API
                     RecipeType = recipe.Recipe.RecipeType.Name,
                     IngredientRecipes = recipe.Recipe.RecipeIngredients.Select(ri => new IngredientRecipeResponse
                     {
+                        
                         Id = ri.Id,
                         Amount = ri.Amount,
                         Ingredient = ri.Ingredient.Name
@@ -93,7 +96,7 @@ namespace EatToday.Web.Controllers.API
                     }).ToList()
                 };
                 response.Add(recipeResponse);
-                
+
             };
             return Ok(response);
         }

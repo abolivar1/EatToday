@@ -116,15 +116,12 @@ namespace EatToday.Prism.ViewModels
             }
             var ingredient = response3.ResultList;
 
-            var parameters2 = new NavigationParameters
-            {
-                { "ingredient", ingredient }
-            };
+            Settings.Ingredients = JsonConvert.SerializeObject(response3.ResultList);
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("ChooseIngredientsPage", parameters2);
+            await _navigationService.NavigateAsync("/EatTodayMasterDetailPage/NavigationPage/ChooseIngredientsPage");
             Password = string.Empty;
 
         }

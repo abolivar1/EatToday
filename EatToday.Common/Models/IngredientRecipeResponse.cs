@@ -9,6 +9,8 @@ namespace EatToday.Common.Models
         public int Id { get; set; }
         public string Amount { get; set; }
         public string Ingredient { get; set; }
+        public string Recipe { get; set; }
+
 
 
     }
