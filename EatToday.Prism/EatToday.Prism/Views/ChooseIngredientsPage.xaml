@@ -14,7 +14,7 @@
                 TextColor="Orange"
                 FontSize="50"
                 Margin="0,0,0,7"
-                Text="Choose the ingredients now, for search the recipes"/>
+                Text="Choose the ingredients now"/>
             <Label
                 TextColor="Orange"
                 FontAttributes="Bold"
