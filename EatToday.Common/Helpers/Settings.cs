@@ -11,6 +11,8 @@ namespace EatToday.Common.Helpers
         private const string _recipe = "Recipe";
         private const string _token = "Token";
         private const string _ingredients = "Ingredients";
+        private const string _isRemembered = "IsRemembered";
+        private static readonly bool _boolDefault = false;
 
 
         private static readonly string _settingsDefault = string.Empty;
@@ -33,6 +35,12 @@ namespace EatToday.Common.Helpers
         {
             get => AppSettings.GetValueOrDefault(_ingredients, _settingsDefault);
             set => AppSettings.AddOrUpdateValue(_ingredients, value);
+        }
+
+        public static bool IsRemembered
+        {
+            get => AppSettings.GetValueOrDefault(_isRemembered, _boolDefault);
+            set => AppSettings.AddOrUpdateValue(_isRemembered, value);
         }
     }
 
