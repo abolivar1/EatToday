@@ -52,7 +52,6 @@
                     <Entry
                     	Grid.Row="5"
                     	Grid.Column="0"
-                        TextColor="Orange"
                     	Placeholder="Enter your address..."
                     	Text="{Binding Address}"/>
 
@@ -92,7 +91,6 @@
                     	Grid.Row="11"
                     	Grid.Column="0"
                     	IsPassword="True"
-                        TextColor="Orange"
                     	Placeholder="Enter your password..."
                     	Text="{Binding Password}"/>
 

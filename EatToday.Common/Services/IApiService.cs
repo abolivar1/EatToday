@@ -35,6 +35,12 @@ namespace EatToday.Common.Services
             string controller,
             TokenRequest request);
 
+        Task<Response<object>> RegisterUserAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            UserRequest userRequest);
+
         Task<bool> CheckConnection(string url);
     }
 

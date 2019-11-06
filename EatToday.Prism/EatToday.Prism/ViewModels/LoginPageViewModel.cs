@@ -18,6 +18,7 @@ namespace EatToday.Prism.ViewModels
         private string _password;
         private bool _isRunning;
         private bool _isEnabled;
+        private bool _isRemember;
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
 
@@ -28,6 +29,7 @@ namespace EatToday.Prism.ViewModels
         {
             Title = "Login";
             IsEnabled = true;
+            IsRemember = true;
             _navigationService = navigationService;
             _apiService = apiService;
 
@@ -59,6 +61,12 @@ namespace EatToday.Prism.ViewModels
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
         }
+        public bool IsRemember
+        {
+            get => _isRemember;
+            set => SetProperty(ref _isRemember, value);
+        }
+
         private async void Login()
         {
             if (string.IsNullOrEmpty(Email))

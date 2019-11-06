@@ -15,7 +15,7 @@
             	AbsoluteLayout.LayoutFlags="All"
                 Padding="10">
                 <Image
-                    HeightRequest="200"
+                    HeightRequest="150"
                     HorizontalOptions="FillAndExpand"
                     BackgroundColor="Transparent"
                     Source="login"/>
@@ -49,6 +49,25 @@
                     Command="{Binding LoginCommand}"
                     Text="Login"
                     VerticalOptions="EndAndExpand"/>
+                <StackLayout
+	                HorizontalOptions="Center"
+	                Orientation="Horizontal">
+                    <Label
+                        TextColor="Orange"
+    	                Text="Rememberme in this device"/>
+                    <CheckBox
+    	                IsChecked="{Binding IsRemember}"/>
+                </StackLayout>
+                <Label
+	                HorizontalOptions="Center"
+	                Text="Forgot your password?"
+	                TextColor="Orange"
+                    TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
                 <Label 
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand">
