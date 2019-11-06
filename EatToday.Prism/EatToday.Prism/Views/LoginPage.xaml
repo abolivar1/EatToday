@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:i18n="clr-namespace:EatToday.Prism.Helpers"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.LoginPage"
@@ -24,21 +25,21 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     HorizontalOptions="Center"          
-                    Text="User"/>
+                    Text="{i18n:Translate User}"/>
                 <Entry
                     Keyboard="Email"
-                    Placeholder="Enter your email."    
-                    Text="{Binding Email}"/>
+                    Placeholder="{i18n:Translate  EmailPlaceHolder}"    
+                    Text="{i18n:Translate Email}"/>
                 <Label
                     TextColor="Orange"
                     FontAttributes="Bold"
                     FontSize="Medium"            
                     HorizontalOptions="Center"
-                    Text="Password"/>
+                    Text="{i18n:Translate Password}"/>
                 <Entry
                     IsPassword="True"            
-                    Placeholder="Enter your password."
-                    Text="{Binding Password}"/>
+                    Placeholder="{i18n:Translate PasswordPlaceHolder}"
+                    Text="{i18n:Translate  Password}"/>
                 <Button
                     BorderColor="Orange"
                     TextColor="Orange"
@@ -47,20 +48,20 @@
                     BorderRadius="10"
                     IsEnabled="{Binding IsEnabled}"
                     Command="{Binding LoginCommand}"
-                    Text="Login"
+                    Text="{i18n:Translate Login}"
                     VerticalOptions="EndAndExpand"/>
                 <StackLayout
 	                HorizontalOptions="Center"
 	                Orientation="Horizontal">
                     <Label
                         TextColor="Orange"
-    	                Text="Rememberme in this device"/>
+    	                Text="{i18n:Translate Rememberme}"/>
                     <CheckBox
     	                IsChecked="{Binding IsRemember}"/>
                 </StackLayout>
                 <Label
 	                HorizontalOptions="Center"
-	                Text="Forgot your password?"
+	                Text="{i18n:Translate ForgotPassword}"
 	                TextColor="Orange"
                     TextDecorations="Underline">
                     <Label.GestureRecognizers>
@@ -73,7 +74,7 @@
                     VerticalOptions="CenterAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="You don't have an account? Sing Up"
+                            <Span Text="{i18n:Translate NotAccount}"
                             TextColor="Orange"
                             TextDecorations="Underline"
                             FontSize="Medium">
@@ -93,7 +94,7 @@
                     TextColor="Orange"
                     FontSize="Medium"
                     HorizontalOptions="Center"          
-                    Text="All rights reserved"/>
+                    Text="{i18n:Translate Rights}"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
                     AnimationType="RollingBall"

@@ -126,9 +126,9 @@ namespace EatToday.Prism.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
-        internal static string Loadign {
+        internal static string Loading {
             get {
-                return ResourceManager.GetString("Loadign", resourceCulture);
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
@@ -147,6 +147,15 @@ namespace EatToday.Prism.Resources {
         internal static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have an account?.
+        /// </summary>
+        internal static string NotAccount {
+            get {
+                return ResourceManager.GetString("NotAccount", resourceCulture);
             }
         }
         
@@ -192,6 +201,24 @@ namespace EatToday.Prism.Resources {
         internal static string Rememberme {
             get {
                 return ResourceManager.GetString("Rememberme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All rights reserved.
+        /// </summary>
+        internal static string Rights {
+            get {
+                return ResourceManager.GetString("Rights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        internal static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
             }
         }
     }
