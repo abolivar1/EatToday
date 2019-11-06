@@ -1,4 +1,5 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
 using Prism.Commands;
 using Prism.Navigation;
 
@@ -20,6 +21,7 @@ namespace MyVet.Prism.ViewModels
         {
             if (PageName.Equals("LoginPage"))
             {
+                Settings.IsRemembered = false;
                 await _navigationService.NavigateAsync("/NavigationPage/LoginPage");
                 return;
             }

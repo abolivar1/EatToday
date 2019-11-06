@@ -43,8 +43,17 @@ namespace EatToday.Web.Controllers.API
             {
                 return NotFound();
             }
-
-            return Ok(customer);
+            var response = new CustomerResponse
+            {
+                Id = customer.Id,
+                FirstName = customer.User.FirstName,
+                LastName = customer.User.LastName,
+                Address = customer.User.Address,
+                Email = customer.User.Email,
+                PhoneNumber = customer.User.PhoneNumber
+                
+            };
+            return Ok(response);
         }
     }
 }

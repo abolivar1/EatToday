@@ -8,13 +8,13 @@ namespace EatToday.Common.Services
 {
     public interface IApiService
     {
-        //Task<Response> GetCustomerByEmail(
-        //    string urlBase,
-        //    string servicePrefix,
-        //    string controller,
-        //    string tokenType,
-        //    string accessToken,
-        //    string email);
+        Task<Response<CustomerResponse>> GetCustomerByEmailAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            EmailRequest emailRequest);
         Task<Response<RecipeResponse>> GetRecipesByIngredientsAsync(
             string urlBase,
             string servicePrefix,

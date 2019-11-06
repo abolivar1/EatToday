@@ -5,6 +5,10 @@ using EatToday.Prism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EatToday.Common.Services;
+using Newtonsoft.Json;
+using EatToday.Common.Models;
+using EatToday.Common.Helpers;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace EatToday.Prism
@@ -20,8 +24,15 @@ namespace EatToday.Prism
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTY0MzYwQDMxMzcyZTMzMmUzMENmNTlSd1E0MmtLZ1I3RkVrMjF4ZXFXd1haR3lha2Z6RjNuZERhN3pSTVk9");
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
-
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
+            {
+                await NavigationService.NavigateAsync("/EatTodayMasterDetailPage/NavigationPage/ChooseIngredientsPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

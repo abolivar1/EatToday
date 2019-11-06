@@ -133,7 +133,23 @@ namespace EatToday.Prism.ViewModels
             var ingredient = response3.ResultList;
 
             Settings.Ingredients = JsonConvert.SerializeObject(response3.ResultList);
+            Settings.IsRemembered = IsRemember;
+            var requestEmail = new EmailRequest
+            {
+                Email = Email
+            };
+            var response4 = await _apiService.GetCustomerByEmailAsync(url, "/api", "/Customers/GetCustomerByEmail", "bearer", token.Token, requestEmail);
+            if (!response4.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
 
+                IsRunning = false;
+                IsEnabled = true;
+                return;
+
+            }
+
+            Settings.Customer = JsonConvert.SerializeObject(response4.Result);
             IsRunning = false;
             IsEnabled = true;
 

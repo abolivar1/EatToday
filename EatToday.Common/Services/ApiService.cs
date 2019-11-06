@@ -67,6 +67,53 @@ namespace EatToday.Common.Services
                 };
             }
         }
+        public async Task<Response<CustomerResponse>> GetCustomerByEmailAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            EmailRequest emailRequest)
+        {
+            try
+            {
+                var request = JsonConvert.SerializeObject(emailRequest);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<CustomerResponse>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var customer = JsonConvert.DeserializeObject<CustomerResponse>(result);
+                return new Response<CustomerResponse>
+                {
+                    IsSuccess = true,
+                    Result = customer
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<CustomerResponse>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
 
         public async Task<Response<RecipeResponse>> GetRecipesByIngredientsAsync(
             string urlBase,

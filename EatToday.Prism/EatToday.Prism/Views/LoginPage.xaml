@@ -96,16 +96,16 @@
                     Text="All rights reserved"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
-                    AnimationType="RollingBall"
-                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                    AbsoluteLayout.LayoutFlags="All"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="Center"
-                    TextColor="Transparent"
-                    IsVisible="{Binding IsRunning}"
-                    VerticalOptions="Center"
-                    ViewBoxWidth="120"
-                    ViewBoxHeight="120" />
+                AnimationType="RollingBall"
+                AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                TextColor="Transparent"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center"
+                ViewBoxWidth="120"
+                ViewBoxHeight="120" />
         </AbsoluteLayout>
     </ScrollView>
     
