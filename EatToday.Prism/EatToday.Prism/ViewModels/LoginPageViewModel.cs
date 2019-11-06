@@ -19,6 +19,7 @@ namespace EatToday.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private bool _isRemember;
+        private DelegateCommand _forgotPasswordCommand;
         private DelegateCommand _loginCommand;
         private DelegateCommand _registerCommand;
 
@@ -41,8 +42,9 @@ namespace EatToday.Prism.ViewModels
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
         public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(Register));
 
-        
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ForgotPassword));
 
+        
         public string Email { get; set; }
 
         public string Password
@@ -143,5 +145,11 @@ namespace EatToday.Prism.ViewModels
         {
             await _navigationService.NavigateAsync("RegisterPage");
         }
+
+        private async void ForgotPassword()
+        {
+            await _navigationService.NavigateAsync("RememberPasswordPage");
+        }
+
     }
 }
