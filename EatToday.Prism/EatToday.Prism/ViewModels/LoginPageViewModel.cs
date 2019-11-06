@@ -1,6 +1,7 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
 using EatToday.Common.Services;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -91,7 +92,7 @@ namespace EatToday.Prism.ViewModels
             {
                 IsEnabled = true;
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailError, Languages.Accept);
                 return;
             }
 
