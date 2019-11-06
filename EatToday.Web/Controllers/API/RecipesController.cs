@@ -42,14 +42,50 @@ namespace EatToday.Web.Controllers.API
             //    .Include(r => r.FavouriteRecipes)
             //    .Include(r => r.RecipeIngredients)
             //    .ThenInclude(r => r.Ingredient)
-            //    .Where(r => r.RecipeIngredients.Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients[0])))
-            //    .OrderBy(r => r.Recipe.Name)
             //    .ToListAsync();
             //.ToList();
             //.All(r => r.RecipeIngredients.Count > 0);
             //.AnyAsync(r => r.RecipeIngredients.Count > 0);
 
             //.Any(r => r.RecipeIngredients.Any(ri => ri.Ingredient == ))
+
+            //try
+            //{
+            //    var recipes = ;
+            //}
+            //catch (Exception e)
+            //{
+
+            //    throw;
+            //}
+
+            //try
+            //{
+            //    var recipes = _dataContext.AllRecipesViews
+            //    .Where(x => recipeRequest.Ingredients.Any(y => y == x.NameIngredient))
+            //    .ToList();
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw;
+            //}
+
+
+            //var recipes = await _dataContext.RecipeIngredients
+            //    .Include(r => r.Recipe)
+            //    .ThenInclude(r => r.RecipeType)
+            //    .Include(r => r.Recipe)
+            //    .ThenInclude(r => r.Comments)
+            //    .Include(r => r.Recipe)
+            //    .ThenInclude(r => r.RateRecipes)
+            //    .Include(r => r.Recipe)
+            //    .ThenInclude(r => r.FavouriteRecipes)
+            //    .Include(r => r.Ingredient)
+            //    .Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients[0]))
+            //    .OrderBy(r => r.Recipe.Name)
+            //    .ToListAsync();
+
             var recipes = await _dataContext.RecipeIngredients
                 .Include(r => r.Recipe)
                 .ThenInclude(r => r.RecipeType)
@@ -60,16 +96,19 @@ namespace EatToday.Web.Controllers.API
                 .Include(r => r.Recipe)
                 .ThenInclude(r => r.FavouriteRecipes)
                 .Include(r => r.Ingredient)
-                .Where(r => r.Ingredient.Name.Contains(recipeRequest.Ingredients[0]))
                 .OrderBy(r => r.Recipe.Name)
                 .ToListAsync();
+
+
+            var recipesfilter = recipes.Where(r => recipeRequest.Ingredients.Any(i => i == r.Ingredient.Name))
+                .ToList();
 
 
 
 
             var response = new List<RecipeResponse>();
 
-            foreach (var recipe in recipes)
+            foreach (var recipe in recipesfilter)
             {
                 var recipeResponse = new RecipeResponse
                 {
@@ -82,7 +121,6 @@ namespace EatToday.Web.Controllers.API
                     RecipeType = recipe.Recipe.RecipeType.Name,
                     IngredientRecipes = recipe.Recipe.RecipeIngredients.Select(ri => new IngredientRecipeResponse
                     {
-                        
                         Id = ri.Id,
                         Amount = ri.Amount,
                         Ingredient = ri.Ingredient.Name
@@ -98,6 +136,9 @@ namespace EatToday.Web.Controllers.API
                 response.Add(recipeResponse);
 
             };
+            //response.Distinct().ToList();
+            var noDupsList = new HashSet<RecipeResponse>(response).ToList();
+
             return Ok(response);
         }
 

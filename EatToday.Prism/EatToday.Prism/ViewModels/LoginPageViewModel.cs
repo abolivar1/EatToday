@@ -19,6 +19,8 @@ namespace EatToday.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private DelegateCommand _loginCommand;
+        private DelegateCommand _registerCommand;
+
 
         public LoginPageViewModel(
             INavigationService navigationService,
@@ -35,6 +37,9 @@ namespace EatToday.Prism.ViewModels
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
+        public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(Register));
+
+        
 
         public string Email { get; set; }
 
@@ -124,6 +129,11 @@ namespace EatToday.Prism.ViewModels
             await _navigationService.NavigateAsync("/EatTodayMasterDetailPage/NavigationPage/ChooseIngredientsPage");
             Password = string.Empty;
 
+        }
+
+        private async void Register()
+        {
+            await _navigationService.NavigateAsync("RegisterPage");
         }
     }
 }

@@ -31,5 +31,8 @@ namespace EatToday.Web.Data
 
         public DbSet<RecipeType> RecipeTypes { get; set; }
 
+        public DbSet<AllRecipesView> AllRecipesViews { get; set; }
+
+
     }
 }

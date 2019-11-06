@@ -49,6 +49,32 @@
                     Command="{Binding LoginCommand}"
                     Text="Login"
                     VerticalOptions="EndAndExpand"/>
+                <Label 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="You don't have an account? Sing Up"
+                            TextColor="Orange"
+                            TextDecorations="Underline"
+                            FontSize="Medium">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label
+                    TextColor="Orange"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"          
+                    Text="® 2019"/>
+                <Label
+                    TextColor="Orange"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"          
+                    Text="All rights reserved"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
                     AnimationType="RollingBall"
