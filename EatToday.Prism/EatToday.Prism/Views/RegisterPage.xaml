@@ -15,7 +15,6 @@
             	Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -24,83 +23,113 @@
                     	Grid.Row="0"
                     	Grid.Column="0"
                     	Text="First Name"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="0"
-                    	Grid.Column="1"
+                    	Grid.Row="1"
+                    	Grid.Column="0"
                     	Placeholder="Enter your firstname..."
                     	Text="{Binding FirstName}"/>
 
                     <Label
-                    	Grid.Row="1"
+                    	Grid.Row="2"
                     	Grid.Column="0"
                     	Text="LastName"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="1"
-                    	Grid.Column="1"
+                    	Grid.Row="3"
+                    	Grid.Column="0"
                     	Placeholder="Enter your last name..."
                     	Text="{Binding LastName}"/>
 
                     <Label
-                    	Grid.Row="2"
+                    	Grid.Row="4"
                     	Grid.Column="0"
                     	Text="Address"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="2"
-                    	Grid.Column="1"
+                    	Grid.Row="5"
+                    	Grid.Column="0"
+                        TextColor="Orange"
                     	Placeholder="Enter your address..."
                     	Text="{Binding Address}"/>
 
                     <Label
-                    	Grid.Row="3"
+                    	Grid.Row="6"
                     	Grid.Column="0"
                     	Text="Email"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="3"
-                    	Grid.Column="1"
+                    	Grid.Row="7"
+                    	Grid.Column="0"
                     	Keyboard="Email"
                     	Placeholder="Enter your email..."
                     	Text="{Binding Email}"/>
 
                     <Label
-                    	Grid.Row="4"
+                    	Grid.Row="8"
                     	Grid.Column="0"
                     	Text="Phone"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="4"
-                    	Grid.Column="1"
+                    	Grid.Row="9"
+                    	Grid.Column="0"
+                        Keyboard="Telephone"
                     	Placeholder="Enter your phonenumber..."
                     	Text="{Binding Phone}"/>
 
                     <Label
-                    	Grid.Row="5"
+                    	Grid.Row="10"
                     	Grid.Column="0"
                     	Text="Password"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="5"
-                    	Grid.Column="1"
+                    	Grid.Row="11"
+                    	Grid.Column="0"
                     	IsPassword="True"
+                        TextColor="Orange"
                     	Placeholder="Enter your password..."
                     	Text="{Binding Password}"/>
 
                     <Label
-                    	Grid.Row="6"
+                    	Grid.Row="12"
                     	Grid.Column="0"
                     	Text="Password Confirm"
+                        TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
-                    	Grid.Row="6"
-                    	Grid.Column="1"
+                    	Grid.Row="13"
+                    	Grid.Column="0"
                     	IsPassword="True"
                     	Placeholder="Enter the password confirm"
                     	Text="{Binding PasswordConfirm}"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                 </Grid>
                 <Button
+                    BorderColor="Orange"
+                    TextColor="Orange"
+                    BackgroundColor="White"
+                    BorderWidth="2"
+                    BorderRadius="10"
                 	Command="{Binding RegisterCommand}"
                 	IsEnabled="{Binding IsEnabled}"
                 	Text="Register"

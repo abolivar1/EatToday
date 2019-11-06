@@ -40,6 +40,6 @@ namespace EatToday.Web.Data.Entities
         //TODO: replace the correct URL for the image
         public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
             ? null
-            : $"https://eattodayweb.azurewebsites.net{ImageUrl.Substring(1)}";
+            : $"https://eattoday.azurewebsites.net{ImageUrl.Substring(1)}";
     }
 }
