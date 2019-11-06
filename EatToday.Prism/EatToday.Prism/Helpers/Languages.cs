@@ -22,6 +22,8 @@ namespace EatToday.Prism.Helpers
         public static string Error => Resource.Error;
 
         public static string EmailError => Resource.EmailError;
+        public static string PasswordError => Resource.PasswordError;
+        public static string CheckInternet => Resource.CheckInternet;
     }
 
 }
