@@ -92,17 +92,16 @@ namespace EatToday.Prism.Views
                 return;
 
             }
-            var recipe = response2.ResultList;
+            Settings.Recipes = JsonConvert.SerializeObject(response2.ResultList);
 
-            //var parameters = new NavigationParameters
-            //{
-            //    { "recipe", recipe }
-            //};
 
-            //IsRunning = false;
-            //IsEnabled = true;
+            IsRunning = false;
+            IsEnabled = true;
 
-            //await _navigationService.NavigateAsync("RecipesPage", parameters);
+            //await _navigationService.NavigateAsync("RecipesPage");
+
+
+            await Navigation.PushAsync( new RecipesPage());
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using EatToday.Common.Models;
+﻿using EatToday.Common.Helpers;
+using EatToday.Common.Models;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -18,7 +20,10 @@ namespace EatToday.Prism.ViewModels
         {
             Title = "Recipes";
             _navigationService = navigationService;
+            LoadRecipes();
         }
+
+
 
         public ObservableCollection<RecipeItemViewModel> Recipes
         {
@@ -26,27 +31,44 @@ namespace EatToday.Prism.ViewModels
             set => SetProperty(ref _recipes, value);
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+
+        private void LoadRecipes()
         {
-            base.OnNavigatingTo(parameters);
+            var _recipes = JsonConvert.DeserializeObject<List<RecipeResponse>>(Settings.Recipes);
 
-            if (parameters.ContainsKey("recipe"))
+            Recipes = new ObservableCollection<RecipeItemViewModel>(_recipes.Select(r => new RecipeItemViewModel(_navigationService)
             {
-                _recipe = parameters.GetValue<RecipeResponse>("recipe");
-                var _recipe2 = new [] { _recipe };
-                Recipes = new ObservableCollection<RecipeItemViewModel>(_recipe2.Select(r => new RecipeItemViewModel(_navigationService)
-                {
-                    Name = r.Name,
-                    Description = r.Description,
-                    Instructions = r.Instructions,
-                    ImageUrl = r.ImageUrl,
-                    RecipeType = r.RecipeType,
-                    IngredientRecipes = r.IngredientRecipes,
-                    CommentResponses = r.CommentResponses,
+                Name = r.Name,
+                Description = r.Description,
+                Instructions = r.Instructions,
+                ImageUrl = r.ImageUrl,
+                RecipeType = r.RecipeType,
+                IngredientRecipes = r.IngredientRecipes,
+                CommentResponses = r.CommentResponses,
 
-                }).ToList());
-            }
-            
+            }).ToList());
         }
+        //public override void OnNavigatingTo(INavigationParameters parameters)
+        //{
+        //    base.OnNavigatingTo(parameters);
+
+        //    if (parameters.ContainsKey("recipe"))
+        //    {
+        //        _recipe = parameters.GetValue<RecipeResponse>("recipe");
+        //        var _recipe2 = new [] { _recipe };
+        //        Recipes = new ObservableCollection<RecipeItemViewModel>(_recipes.Select(r => new RecipeItemViewModel(_navigationService)
+        //        {
+        //            Name = r.Name,
+        //            Description = r.Description,
+        //            Instructions = r.Instructions,
+        //            ImageUrl = r.ImageUrl,
+        //            RecipeType = r.RecipeType,
+        //            IngredientRecipes = r.IngredientRecipes,
+        //            CommentResponses = r.CommentResponses,
+
+        //        }).ToList());
+        //    }
+            
+        //}
     }
 }

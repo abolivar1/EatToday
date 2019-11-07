@@ -9,6 +9,7 @@ namespace EatToday.Common.Helpers
     public static class Settings
     {
         private const string _recipe = "Recipe";
+        private const string _recipes = "Recipes";
         private const string _token = "Token";
         private const string _ingredients = "Ingredients";
         private const string _customer = "Customer";
@@ -21,6 +22,12 @@ namespace EatToday.Common.Helpers
         private static ISettings AppSettings => CrossSettings.Current;
 
         public static string Recipe
+        {
+            get => AppSettings.GetValueOrDefault(_recipes, _settingsDefault);
+            set => AppSettings.AddOrUpdateValue(_recipes, value);
+        }
+
+        public static string Recipes
         {
             get => AppSettings.GetValueOrDefault(_recipe, _settingsDefault);
             set => AppSettings.AddOrUpdateValue(_recipe, value);
