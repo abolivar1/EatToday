@@ -147,11 +147,11 @@ namespace EatToday.Common.Services
                     };
                 }
 
-                var recipes = JsonConvert.DeserializeObject<RecipeResponse>(result);
+                var recipes = JsonConvert.DeserializeObject<List<RecipeResponse>>(result);
                 return new Response<RecipeResponse>
                 {
                     IsSuccess = true,
-                    Result = recipes
+                    ResultList = recipes
                 };
             }
             catch (Exception ex)

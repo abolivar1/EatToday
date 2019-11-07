@@ -137,7 +137,7 @@ namespace EatToday.Web.Controllers.API
 
             };
             //response.Distinct().ToList();
-            var noDupsList = new HashSet<RecipeResponse>(response).ToList();
+            //var noDupsList = new HashSet<RecipeResponse>(response).ToList();
 
             return Ok(response);
         }

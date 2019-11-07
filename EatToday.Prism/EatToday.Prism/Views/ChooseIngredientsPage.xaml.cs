@@ -82,17 +82,17 @@ namespace EatToday.Prism.Views
 
             var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
-            //var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api", "/Recipes/GetRecipes", "bearer", token.Token, Ingredients);
-            //if (!response2.IsSuccess)
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
+            var response2 = await _apiService.GetRecipesByIngredientsAsync(url, "/api/", "Recipes/GetRecipes", "bearer", token.Token, Ingredients);
+            if (!response2.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
 
-            //    IsRunning = false;
-            //    IsEnabled = true;
-            //    return;
+                IsRunning = false;
+                IsEnabled = true;
+                return;
 
-            //}
-            //var recipe = response2.Result;
+            }
+            var recipe = response2.ResultList;
 
             //var parameters = new NavigationParameters
             //{
