@@ -36,7 +36,7 @@ namespace EatToday.Prism.ViewModels
         {
             var _recipes = JsonConvert.DeserializeObject<List<RecipeResponse>>(Settings.Recipes);
 
-            Recipes = new ObservableCollection<RecipeItemViewModel>(_recipes.Select(r => new RecipeItemViewModel(_navigationService)
+            var recipesDeuplicate = new ObservableCollection<RecipeItemViewModel>(_recipes.Select(r => new RecipeItemViewModel(_navigationService)
             {
                 Name = r.Name,
                 Description = r.Description,
@@ -47,28 +47,16 @@ namespace EatToday.Prism.ViewModels
                 CommentResponses = r.CommentResponses,
 
             }).ToList());
+
+            Recipes = new ObservableCollection<RecipeItemViewModel>();
+            foreach (var item in recipesDeuplicate)
+            {
+                var found = Recipes.FirstOrDefault(r => r.Name == item.Name);
+                if (found == null)
+                {
+                    Recipes.Add(item);
+                }
+            }
         }
-        //public override void OnNavigatingTo(INavigationParameters parameters)
-        //{
-        //    base.OnNavigatingTo(parameters);
-
-        //    if (parameters.ContainsKey("recipe"))
-        //    {
-        //        _recipe = parameters.GetValue<RecipeResponse>("recipe");
-        //        var _recipe2 = new [] { _recipe };
-        //        Recipes = new ObservableCollection<RecipeItemViewModel>(_recipes.Select(r => new RecipeItemViewModel(_navigationService)
-        //        {
-        //            Name = r.Name,
-        //            Description = r.Description,
-        //            Instructions = r.Instructions,
-        //            ImageUrl = r.ImageUrl,
-        //            RecipeType = r.RecipeType,
-        //            IngredientRecipes = r.IngredientRecipes,
-        //            CommentResponses = r.CommentResponses,
-
-        //        }).ToList());
-        //    }
-            
-        //}
     }
 }

@@ -9,12 +9,12 @@
 
     <ScrollView>
         <StackLayout
-        Padding="8,0,8,0">
+            Padding="8,0,8,0">
             <ffimageloading:CachedImage
 	            Grid.Row="0"
                 Aspect="AspectFit"
                 Margin="0"
-	            Source="{Binding ImageUrl}"
+	            Source="{Binding Recipe.ImageUrl}"
 	            LoadingPlaceholder= "LoaderImage"
 	            ErrorPlaceholder= "ErrorImage"
 	            CacheDuration= "50"
@@ -24,13 +24,17 @@
                 WidthRequest="400"
                 HeightRequest="200"/>
             <Label
-            Text="{Binding Recipe.Name}"/>
+                Text="{Binding Recipe.Name}"/>
             <Label
-            Text="Ingredients"/>
+                Text="{Binding Recipe.Description}"/>
+            <Label
+                Margin="0,8,0,8"
+                FontSize="Medium"
+                Text="Remarks"/>
             <ListView
-            SeparatorVisibility="None"         
-            HasUnevenRows="True"
-            ItemsSource="{Binding Recipe.IngredientRecipes}">
+                SeparatorVisibility="None"         
+                HasUnevenRows="True"
+                ItemsSource="{Binding Recipe.CommentResponses}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -41,17 +45,17 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Text="-"/>
+                                    Grid.Row="0"
+                                    Grid.Column="0"                                    
+                                    Text="{Binding Customer}"/>
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="1"                                    
-                                Text="{Binding Amount}"/>
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding DateLocal}"/>
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                Text="{Binding Ingredient}"/>
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Text="{Binding Remarks}"/>
                                 <!--<Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>-->
@@ -60,10 +64,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label
-            Text="Preparation"/>
-            <Label
-            Text="{Binding Recipe.Instructions}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

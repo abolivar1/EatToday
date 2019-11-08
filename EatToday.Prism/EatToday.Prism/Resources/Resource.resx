@@ -148,7 +148,7 @@
     <value>Remember me in this device</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot your password?</value>
+    <value>Forgot password</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -163,10 +163,10 @@
     <value>Email or password incorrect</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>User</value>
+    <value>Email Address</value>
   </data>
   <data name="NotAccount" xml:space="preserve">
-    <value>You do not have an account?</value>
+    <value>Sign Up</value>
   </data>
   <data name="Rights" xml:space="preserve">
     <value>All rights reserved</value>

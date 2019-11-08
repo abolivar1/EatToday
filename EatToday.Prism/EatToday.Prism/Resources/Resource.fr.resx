@@ -139,7 +139,7 @@
     <value>Entrez votre adresse e-mail</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Mot de passe :</value>
+    <value>Mot de passe</value>
   </data>
   <data name="PasswordPlaceHolder" xml:space="preserve">
     <value>Entrez votre mot de passe</value>
@@ -148,13 +148,13 @@
     <value>Souviens-toi de moi dans cet appareil!</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Vous avez oublié votre mot de passe ?</value>
+    <value>Mot de passe oublié</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Connexion</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>&amp;Inscrire dans la base de registres...</value>
+    <value>Inscrire dans la base de registres...</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Chargement</value>
@@ -163,10 +163,10 @@
     <value>Email ou mot de passe incorrect!</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>Utilisateur</value>
+    <value>Courrier électronique</value>
   </data>
   <data name="NotAccount" xml:space="preserve">
-    <value>Vous n'avez pas de compte</value>
+    <value>S'inscrire</value>
   </data>
   <data name="Rights" xml:space="preserve">
     <value>Tous droits réservés.</value>

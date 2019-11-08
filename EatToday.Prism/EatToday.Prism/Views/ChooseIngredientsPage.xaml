@@ -4,19 +4,18 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="EatToday.Prism.Views.ChooseIngredientsPage"
-             Title="{Binding Title}">
+             x:Class="EatToday.Prism.Views.ChooseIngredientsPage">
     <ScrollView>
         <StackLayout
         Padding="10">
             <Label
                 HorizontalOptions="FillAndExpand"
-                TextColor="Orange"
+                TextColor="#FFB21C"
                 FontSize="50"
                 Margin="0,0,0,7"
                 Text="Choose the ingredients now"/>
             <Label
-                TextColor="Orange"
+                TextColor="#FFB21C"
                 FontAttributes="Bold"
                 FontSize="Medium"
                 Text="Ingredients"/>
@@ -46,11 +45,10 @@
             </autocomplete:SfAutoComplete>
             <Button
                 x:Name="searchButton"
-                BorderColor="Orange"
-                TextColor="Orange"
-                BackgroundColor="White"
-                BorderWidth="2"
-                BorderRadius="10"
+                TextColor="White"
+                BackgroundColor="#FFB21C"
+                BorderWidth="2" 
+                BorderRadius="30"  
                 IsEnabled="{Binding IsEnabled2}"
                 Command="{Binding SearchRecipesCommand}"                
                 Text="Search Recipes"

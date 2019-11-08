@@ -6,95 +6,101 @@
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.LoginPage"
-             Title="{Binding Title}"
-             BackgroundColor="Transparent">
-
+             BackgroundColor="White">
     <ScrollView>
         <AbsoluteLayout>
             <StackLayout
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
             	AbsoluteLayout.LayoutFlags="All"
-                Padding="10">
+                Padding="15">
                 <Image
-                    HeightRequest="150"
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="Transparent"
-                    Source="login"/>
+                HeightRequest="150"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="Transparent"
+                Source="logoeat"/>
                 <Label
-                    TextColor="Orange"
-                    FontAttributes="Bold"
-                    FontSize="Medium"
-                    HorizontalOptions="Center"          
-                    Text="{i18n:Translate User}"/>
+                TextColor="#6B6B6B"
+                FontSize="Body"
+                HorizontalOptions="Start"          
+                Text="{i18n:Translate User}"/>
                 <Entry
-                    Keyboard="Email"
-                    Placeholder="{i18n:Translate  EmailPlaceHolder}"    
-                    Text="{i18n:Translate Email}"/>
+                Keyboard="Email"
+                FontSize="Body"
+                TextColor="#6B6B6B"
+                PlaceholderColor="#CCCCCC"                    
+                Placeholder="{i18n:Translate  EmailPlaceHolder}"/>
                 <Label
-                    TextColor="Orange"
-                    FontAttributes="Bold"
-                    FontSize="Medium"            
-                    HorizontalOptions="Center"
-                    Text="{i18n:Translate Password}"/>
+                TextColor="#6B6B6B"
+                FontSize="Body"            
+                HorizontalOptions="Start"
+                Text="{i18n:Translate Password}"/>
                 <Entry
-                    IsPassword="True"            
-                    Placeholder="{i18n:Translate PasswordPlaceHolder}"
-                    Text="{i18n:Translate  Password}"/>
+                IsPassword="True"
+                FontSize="Body"
+                TextColor="#6B6B6B"
+                PlaceholderColor="#CCCCCC"          
+                Placeholder="{i18n:Translate PasswordPlaceHolder}"/>
                 <Button
-                    BorderColor="Orange"
-                    TextColor="Orange"
-                    BackgroundColor="White"
-                    BorderWidth="2"
-                    BorderRadius="10"
-                    IsEnabled="{Binding IsEnabled}"
-                    Command="{Binding LoginCommand}"
-                    Text="{i18n:Translate Login}"
-                    VerticalOptions="EndAndExpand"/>
+                TextColor="White"
+                BackgroundColor="#FFB21C"
+                BorderWidth="2" 
+                BorderRadius="30"                
+                IsEnabled="{Binding IsEnabled}"
+                Command="{Binding LoginCommand}"
+                Text="{i18n:Translate Login}"/>
                 <StackLayout
-	                HorizontalOptions="Center"
-	                Orientation="Horizontal">
+	            HorizontalOptions="Center"
+	            Orientation="Horizontal">
                     <Label
-                        TextColor="Orange"
-    	                Text="{i18n:Translate Rememberme}"/>
+                    TextColor="Orange"
+                    FontSize="Body"
+    	            Text="{i18n:Translate Rememberme}"/>
                     <CheckBox
-    	                IsChecked="{Binding IsRemember}"/>
+    	            IsChecked="{Binding IsRemember}"/>
                 </StackLayout>
-                <Label
-	                HorizontalOptions="Center"
-	                Text="{i18n:Translate ForgotPassword}"
-	                TextColor="Orange"
-                    TextDecorations="Underline">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-
-                <Label 
-                    HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{i18n:Translate NotAccount}"
+                <StackLayout
+	            Orientation="Horizontal">
+                    <Label 
+                    HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{i18n:Translate NotAccount}"
                             TextColor="Orange"
                             TextDecorations="Underline"
-                            FontSize="Medium">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
-                                </Span.GestureRecognizers>
-                            </Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label
+                            FontSize="Body">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+	                HorizontalOptions="EndAndExpand"
+	                Text="{i18n:Translate ForgotPassword}"
+	                FontSize="Body"
                     TextColor="Orange"
-                    FontSize="Medium"
-                    HorizontalOptions="Center"          
-                    Text="® 2019"/>
-                <Label
-                    TextColor="Orange"
-                    FontSize="Medium"
-                    HorizontalOptions="Center"          
+                    TextDecorations="Underline">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <StackLayout
+                VerticalOptions="EndAndExpand"
+	            Orientation="Horizontal">
+                    <Label
+                    TextColor="#BDBDBD"
+                    FontSize="Caption"
+                    HorizontalOptions="Start"          
                     Text="{i18n:Translate Rights}"/>
+                    <Label
+                    TextColor="#BDBDBD"
+                    FontSize="Caption"
+                    HorizontalOptions="EndAndExpand"          
+                    Text="2019"/>
+                </StackLayout>
+
             </StackLayout>
             <busyindicator:SfBusyIndicator  
                 AnimationType="RollingBall"
@@ -108,6 +114,7 @@
                 ViewBoxWidth="120"
                 ViewBoxHeight="120" />
         </AbsoluteLayout>
+
     </ScrollView>
-    
+
 </ContentPage>

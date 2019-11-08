@@ -127,7 +127,7 @@
     <value>Error</value>
   </data>
   <data name="PasswordError" xml:space="preserve">
-    <value>Debe escribir una contraseña.</value>
+    <value>Debe escribir una contraseña</value>
   </data>
   <data name="CheckInternet" xml:space="preserve">
     <value>Comprueba tu conexión a Internet</value>
@@ -142,13 +142,13 @@
     <value>Contraseña</value>
   </data>
   <data name="PasswordPlaceHolder" xml:space="preserve">
-    <value>Escriba la contraseña.</value>
+    <value>Escriba la contraseña</value>
   </data>
   <data name="Rememberme" xml:space="preserve">
-    <value>¡Recuérdame en este dispositivo!</value>
+    <value>Recuérdame en este dispositivo</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>¿Olvidó la contraseña?</value>
+    <value>Olvidó la contraseña</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
@@ -163,10 +163,10 @@
     <value>Email o contraseña incorrectos</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>Usuario</value>
+    <value>Correo Electronico</value>
   </data>
   <data name="NotAccount" xml:space="preserve">
-    <value>¿No tienes una cuenta?</value>
+    <value>Registrarse</value>
   </data>
   <data name="Rights" xml:space="preserve">
     <value>Todos los derechos reservados.</value>

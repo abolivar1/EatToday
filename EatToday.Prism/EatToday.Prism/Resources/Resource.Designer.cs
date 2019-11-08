@@ -115,7 +115,7 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forgot your password?.
+        ///   Looks up a localized string similar to Forgot password.
         /// </summary>
         internal static string ForgotPassword {
             get {
@@ -151,7 +151,7 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have an account?.
+        ///   Looks up a localized string similar to Sign Up.
         /// </summary>
         internal static string NotAccount {
             get {
@@ -214,7 +214,7 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User.
+        ///   Looks up a localized string similar to Email Address.
         /// </summary>
         internal static string User {
             get {
