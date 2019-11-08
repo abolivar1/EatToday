@@ -7,59 +7,62 @@
              BackgroundColor="Transparent"
              Title="{Binding Title}">
 
-    <ScrollView>
-        <StackLayout
-            Padding="10">
-            <Frame
-                BorderColor="Transparent"
-                HasShadow="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label
-                        Grid.Row="0"
-                        FontSize="Title"
-                        FontAttributes="Italic"
-                        Text="Ingredients"/>
-                    <ListView
-                        Grid.Row="1"
-                        SeparatorVisibility="None"         
-                        HasUnevenRows="False"
-                        ItemsSource="{Binding Recipe.IngredientRecipes}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
-                                        <Label
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            Text="-"/>
-                                        <Label
-                                            Grid.Row="0"
-                                            Grid.Column="1"                                    
-                                            Text="{Binding Amount}"/>
-                                        <Label
-                                            Grid.Row="0"
-                                            Grid.Column="2"
-                                            Text="{Binding Ingredient}"/>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </Frame>
-        </StackLayout>    
-    </ScrollView>
     
+    <StackLayout
+        Padding="10">
+        <Frame
+            BorderColor="Transparent"
+            HasShadow="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    FontSize="Title"
+                    FontAttributes="Italic"
+                    Text="Ingredients"/>
+                <ListView
+                    Grid.Row="1"
+                    SeparatorVisibility="None"         
+                    HasUnevenRows="False"
+                    SelectionMode="None"
+                    ItemsSource="{Binding Recipe.IngredientRecipes}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                    
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label
+                                        Grid.Row="0"
+                                        FontSize="Body"
+                                        Grid.Column="0"
+                                        Text="-"/>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontSize="Body"                                            
+                                        Text="{Binding Amount}"/>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        FontSize="Body"
+                                        Text="{Binding Ingredient}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Frame>
+    </StackLayout> 
 </ContentPage>

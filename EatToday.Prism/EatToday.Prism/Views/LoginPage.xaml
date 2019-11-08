@@ -52,11 +52,12 @@
 	            HorizontalOptions="Center"
 	            Orientation="Horizontal">
                     <Label
-                    TextColor="Orange"
-                    FontSize="Body"
-    	            Text="{i18n:Translate Rememberme}"/>
+                        TextColor="#FFB21C"
+                        FontSize="Body"
+                        Margin="0,3,0,0"
+    	                Text="{i18n:Translate Rememberme}"/>
                     <CheckBox
-    	            IsChecked="{Binding IsRemember}"/>
+    	                IsChecked="{Binding IsRemember}"/>
                 </StackLayout>
                 <StackLayout
 	            Orientation="Horizontal">
@@ -65,7 +66,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{i18n:Translate NotAccount}"
-                            TextColor="Orange"
+                            TextColor="#FFB21C"
                             TextDecorations="Underline"
                             FontSize="Body">
                                     <Span.GestureRecognizers>
@@ -79,7 +80,7 @@
 	                HorizontalOptions="EndAndExpand"
 	                Text="{i18n:Translate ForgotPassword}"
 	                FontSize="Body"
-                    TextColor="Orange"
+                    TextColor="#FFB21C"
                     TextDecorations="Underline">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>

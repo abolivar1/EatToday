@@ -23,6 +23,7 @@ namespace EatToday.Prism.Views
             InitializeComponent();
             _navigationService = navigationService;
             _apiService = apiService;
+            busyIndicator.IsVisible = false;
 
         }
 
@@ -67,15 +68,15 @@ namespace EatToday.Prism.Views
                 return;
             }
 
-            //IsRunning = true;
-            IsEnabled2 = false;
+            busyIndicator.IsVisible = true;
+            searchButton.IsEnabled = false;
 
             var url = App.Current.Resources["UrlAPI"].ToString();
             var connection = await _apiService.CheckConnection(url);
             if (!connection)
             {
-                IsEnabled2 = true;
-                //IsRunning = false;
+                searchButton.IsEnabled = true;
+                busyIndicator.IsVisible = false;
                 await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
                 return;
             }
@@ -87,16 +88,17 @@ namespace EatToday.Prism.Views
             {
                 await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
 
-                IsRunning = false;
-                IsEnabled = true;
+                busyIndicator.IsVisible = false;
+                searchButton.IsEnabled = true;
+
                 return;
 
             }
             Settings.Recipes = JsonConvert.SerializeObject(response2.ResultList);
 
 
-            IsRunning = false;
-            IsEnabled = true;
+            busyIndicator.IsVisible = false;
+            searchButton.IsEnabled = true;
 
             //await _navigationService.NavigateAsync("RecipesPage");
 

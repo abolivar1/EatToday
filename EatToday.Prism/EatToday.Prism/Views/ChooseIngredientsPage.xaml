@@ -3,35 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"             
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.ChooseIngredientsPage">
     <ScrollView>
-        <StackLayout
-        Padding="10">
-            <Label
-                HorizontalOptions="FillAndExpand"
-                TextColor="#FFB21C"
-                FontSize="50"
-                Margin="0,0,0,7"
-                Text="Choose the ingredients now"/>
-            <Label
-                TextColor="#FFB21C"
-                FontAttributes="Bold"
-                FontSize="Medium"
-                Text="Ingredients"/>
-            <autocomplete:SfAutoComplete
-                x:Name="autoComplete"
-                DisplayMemberPath="Name" 
-                MultiSelectMode="Token"
-                TokensWrapMode="Wrap" 
-                EnableAutoSize="True"
-                MinimumHeightRequest="60"
-                IgnoreDiacritic="False"
-                NoResultsFoundText="No Results Found"                    
-                DataSource="{Binding IngredientsCollection}"
-                SelectionChanged="autoComplete_SelectionChanged">
-                <autocomplete:SfAutoComplete.TokenSettings>
-                    <autocomplete:TokenSettings
+        <AbsoluteLayout>
+            <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+            	    AbsoluteLayout.LayoutFlags="All"
+                    Padding="10">
+                <Label
+                    HorizontalOptions="FillAndExpand"
+                    TextColor="#FFB21C"
+                    FontSize="50"
+                    Margin="0,0,0,7"
+                    Text="Choose the ingredients now"/>
+                <Label
+                    TextColor="#FFB21C"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="Ingredients"/>
+                <autocomplete:SfAutoComplete
+                    x:Name="autoComplete"
+                    DisplayMemberPath="Name" 
+                    MultiSelectMode="Token"
+                    TokensWrapMode="Wrap" 
+                    EnableAutoSize="True"
+                    MinimumHeightRequest="60"
+                    IgnoreDiacritic="False"
+                    NoResultsFoundText="No Results Found"                    
+                    DataSource="{Binding IngredientsCollection}"
+                    SelectionChanged="autoComplete_SelectionChanged">
+                    <autocomplete:SfAutoComplete.TokenSettings>
+                        <autocomplete:TokenSettings
                         FontSize="16"
                         BackgroundColor="#A0A603"
                         TextColor="White"
@@ -41,19 +45,32 @@
                         DeleteButtonPlacement="Right"
                         IsCloseButtonVisible="true"
                         CornerRadius="15"/>
-                </autocomplete:SfAutoComplete.TokenSettings>
-            </autocomplete:SfAutoComplete>
-            <Button
-                x:Name="searchButton"
-                TextColor="White"
-                BackgroundColor="#FFB21C"
-                BorderWidth="2" 
-                BorderRadius="30"  
-                IsEnabled="{Binding IsEnabled2}"
-                Command="{Binding SearchRecipesCommand}"                
-                Text="Search Recipes"
-                VerticalOptions="EndAndExpand"
-                Clicked="searchRecipes"/>
-        </StackLayout>
+                    </autocomplete:SfAutoComplete.TokenSettings>
+                </autocomplete:SfAutoComplete>
+                <Button
+                    x:Name="searchButton"
+                    TextColor="White"
+                    BackgroundColor="#FFB21C"
+                    BorderWidth="2" 
+                    BorderRadius="30"  
+                    IsEnabled="{Binding IsEnabled2}"
+                    Command="{Binding SearchRecipesCommand}"                
+                    Text="Search Recipes"
+                    VerticalOptions="EndAndExpand"
+                    Clicked="searchRecipes"/>
+            </StackLayout>
+            <busyindicator:SfBusyIndicator
+                x:Name="busyIndicator"
+                AnimationType="RollingBall"
+                AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                TextColor="Transparent"
+                IsVisible="{Binding IsRunning}"
+                VerticalOptions="Center"
+                ViewBoxWidth="120"
+                ViewBoxHeight="120" />
+        </AbsoluteLayout>
     </ScrollView>
 </ContentPage>

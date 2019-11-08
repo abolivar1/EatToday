@@ -31,7 +31,7 @@
                 Margin="0,8,0,8"
                 FontSize="Medium"
                 Text="Remarks"/>
-            <ListView
+            <!--<ListView
                 SeparatorVisibility="None"         
                 HasUnevenRows="True"
                 ItemsSource="{Binding Recipe.CommentResponses}">
@@ -56,14 +56,14 @@
                                     Grid.Row="2"
                                     Grid.Column="0"
                                     Text="{Binding Remarks}"/>
-                                <!--<Grid.RowDefinitions>
+                                --><!--<Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>-->
+                                </Grid.RowDefinitions>--><!--
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
         </StackLayout>
     </ScrollView>
 </ContentPage>

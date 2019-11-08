@@ -69,21 +69,19 @@
                 <StackLayout
             	    Orientation="Horizontal">
                     <Button
-                        BorderColor="Orange"
-                        TextColor="Orange"
-                        BackgroundColor="White"
-                        BorderWidth="2"
-                        BorderRadius="10"
+                        TextColor="White"
+                        BackgroundColor="#FFB21C"
+                        BorderWidth="2" 
+                        BorderRadius="30"  
                 	    Command="{Binding SaveCommand}"
                 	    HorizontalOptions="FillAndExpand"
                 	    IsEnabled="{Binding IsEnabled}"
                 	    Text="Save"/>
                     <Button
-                        BorderColor="Orange"
-                        TextColor="Orange"
-                        BackgroundColor="White"
-                        BorderWidth="2"
-                        BorderRadius="10"
+                        TextColor="White"
+                        BackgroundColor="#FFB21C"
+                        BorderWidth="2" 
+                        BorderRadius="30"  
                 	    Command="{Binding ChangePasswordCommand}"
                 	    HorizontalOptions="FillAndExpand"
                 	    IsEnabled="{Binding IsEnabled}"

@@ -4,15 +4,14 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.PreparationRecipePage"
-             BackgroundColor="#F5F5F5"
+             BackgroundColor="Transparent"
              Title="{Binding Title}">
     <ScrollView>
         <StackLayout
             Padding="10">
-            <Frame
-                BorderColor="#ffddb0"                
+            <Frame               
                 HasShadow="True"
-                InputTransparent="True">
+                BorderColor="Transparent">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
@@ -24,7 +23,9 @@
                         FontAttributes="Italic"
                         Text="Preparation"/>
                     <Label
-                        Grid.Row="1"                       
+                        FontSize="Body"
+                        HorizontalTextAlignment="Start"
+                        Grid.Row="1"                     
                         Text="{Binding Recipe.Instructions}"/>
                 </Grid>
             </Frame>
