@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
@@ -14,12 +15,14 @@ namespace EatToday.Prism.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            
             base.OnCreate(bundle);
+            CrossCurrentActivity.Current.Activity = this;
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             new SfBusyIndicatorRenderer();
+            Xamarin.FormsMaps.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

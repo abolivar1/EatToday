@@ -25,6 +25,7 @@ namespace EatToday.Prism.iOS
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             new SfBusyIndicatorRenderer();
+            Xamarin.FormsMaps.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
