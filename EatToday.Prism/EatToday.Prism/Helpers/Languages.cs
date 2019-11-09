@@ -45,6 +45,31 @@ namespace EatToday.Prism.Helpers
         public static string Rememberme => Resource.Rememberme;
         public static string NotAccount => Resource.NotAccount;
         public static string Rights => Resource.Rights;
+
+        public static string ChooseIngredients => Resource.ChooseIngredients;
+        public static string Ingredients => Resource.Ingredients;
+        public static string SearchRecipes => Resource.SearchRecipes;
+        public static string IngredientsError => Resource.IngredientsError;
+        public static string Recipes => Resource.Recipes;
+        public static string Recipe => Resource.Recipe;
+        public static string Preparation => Resource.Preparation;
+        public static string Remarks => Resource.Remarks;
+        public static string FirstName => Resource.FirstName;
+        public static string LastName => Resource.LastName;
+        public static string FirstNamePlaceHolder => Resource.FirstNamePlaceHolder;
+        public static string LastNamePlaceHolder => Resource.LastNamePlaceHolder;
+        public static string Address => Resource.Address;
+        public static string AddressPlaceHolder => Resource.AddressPlaceHolder;
+        public static string Phone => Resource.Phone;
+        public static string PhonePlaceHolder => Resource.PhonePlaceHolder;
+        public static string Save => Resource.Save;
+        public static string ChangePass => Resource.ChangePass;
+        public static string Profile => Resource.Profile;
+        public static string GetIngredients => Resource.GetIngredients;
+        public static string Logout => Resource.Logout;
+
+        public static string PasswordConfirm => Resource.PasswordConfirm;
+        public static string PasswordConfirmPlaceHolder => Resource.PasswordConfirmPlaceHolder;
     }
 
 }

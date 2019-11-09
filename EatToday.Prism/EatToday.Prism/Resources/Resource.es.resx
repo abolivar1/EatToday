@@ -154,7 +154,7 @@
     <value>Iniciar sesión</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Registrar...</value>
+    <value>Registrarse</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Cargando...</value>
@@ -170,5 +170,77 @@
   </data>
   <data name="Rights" xml:space="preserve">
     <value>Todos los derechos reservados.</value>
+  </data>
+  <data name="ChooseIngredients" xml:space="preserve">
+    <value>Elige los ingredientes ahora</value>
+  </data>
+  <data name="Ingredients" xml:space="preserve">
+    <value>Ingredientes</value>
+  </data>
+  <data name="SearchRecipes" xml:space="preserve">
+    <value>Buscar recetas</value>
+  </data>
+  <data name="IngredientsError" xml:space="preserve">
+    <value>Debes ingresar un ingrediente</value>
+  </data>
+  <data name="Recipes" xml:space="preserve">
+    <value>Recetas</value>
+  </data>
+  <data name="Recipe" xml:space="preserve">
+    <value>Receta</value>
+  </data>
+  <data name="Preparation" xml:space="preserve">
+    <value>Preparación</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Comentarios</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="FirstNamePlaceHolder" xml:space="preserve">
+    <value>Ingresa tu nombre</value>
+  </data>
+  <data name="LastNamePlaceHolder" xml:space="preserve">
+    <value>Ingresa tu apellido</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="AddressPlaceHolder" xml:space="preserve">
+    <value>Introduzca su dirección</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>teléfono</value>
+  </data>
+  <data name="PhonePlaceHolder" xml:space="preserve">
+    <value>Escribe tu número de teléfono</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePass" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="GetIngredients" xml:space="preserve">
+    <value>Obtener Ingredientes</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
+    <value>Ingrese su confirmación de contraseña</value>
+  </data>
+  <data name="RecoverPassword" xml:space="preserve">
+    <value>Recuperar Contraseña</value>
   </data>
 </root>

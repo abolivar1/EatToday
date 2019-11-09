@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:i18n="clr-namespace:EatToday.Prism.Helpers"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="EatToday.Prism.Views.PreparationRecipePage"
              BackgroundColor="Transparent"
@@ -21,7 +22,7 @@
                         Grid.Row="0"
                         FontSize="Title"
                         FontAttributes="Italic"
-                        Text="Preparation"/>
+                        Text="{i18n:Translate Preparation}"/>
                     <Label
                         FontSize="Body"
                         HorizontalTextAlignment="Start"
