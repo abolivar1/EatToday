@@ -1,6 +1,7 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
 using EatToday.Common.Services;
+using EatToday.Prism.Helpers;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -25,7 +26,7 @@ namespace EatToday.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Recover Password";
+            Title = Languages.RecoverPassword;
             IsEnabled = true;
         }
 
@@ -74,16 +75,16 @@ namespace EatToday.Prism.ViewModels
             if (!response.IsSuccess)
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     response.Message,
-                    "Accept");
+                    Languages.Accept);
                 return;
             }
 
             await App.Current.MainPage.DisplayAlert(
-                "Ok",
+                Languages.Error,
                 response.Message,
-                "Accept");
+                Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 
@@ -91,7 +92,7 @@ namespace EatToday.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Email) || !RegexHelper.IsValidEmail(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a valid email.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailValidError, Languages.Accept);
                 return false;
             }
 

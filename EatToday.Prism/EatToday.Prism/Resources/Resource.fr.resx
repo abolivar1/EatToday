@@ -148,7 +148,7 @@
     <value>Souviens-toi de moi dans cet appareil!</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Mot de passe oublié</value>
+    <value>Mot de passe oublié?</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Connexion</value>
@@ -242,5 +242,41 @@
   </data>
   <data name="RecoverPassword" xml:space="preserve">
     <value>Récupérer le mot de passe</value>
+  </data>
+  <data name="ErrorProblem" xml:space="preserve">
+    <value>Nous avons un gros problème. /Nous sommes aux prises avec un énorme problème.</value>
+  </data>
+  <data name="EmailIncorrect" xml:space="preserve">
+    <value>Email ou mot de passe incorrect!</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Carte</value>
+  </data>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>Vous devez entrer un nom.</value>
+  </data>
+  <data name="LastNameError" xml:space="preserve">
+    <value>- Vous devez entrer un nom</value>
+  </data>
+  <data name="AddressError" xml:space="preserve">
+    <value>Vous devez indiquer une adresse.</value>
+  </data>
+  <data name="EmailValidError" xml:space="preserve">
+    <value>Vous devez introduire une adresse électronique valide.</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Vous devez entrer un numéro de téléphone.</value>
+  </data>
+  <data name="PasswordMinimumError" xml:space="preserve">
+    <value>Vous devez saisir un mot de passe au moins 6 caractères</value>
+  </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>Vous devez saisir un mot de passe.</value>
+  </data>
+  <data name="NotMatchPasswordError" xml:space="preserve">
+    <value>Le mot de passe et sa confirmation ne coïncident pas.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
   </data>
 </root>

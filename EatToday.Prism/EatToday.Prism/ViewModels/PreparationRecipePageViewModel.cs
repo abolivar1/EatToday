@@ -1,5 +1,6 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -17,7 +18,7 @@ namespace EatToday.Prism.ViewModels
         public PreparationRecipePageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Recipe = JsonConvert.DeserializeObject<RecipeResponse>(Settings.Recipe);
-            Title = "Preparation";
+            Title = Languages.Preparation;
         }
         public RecipeResponse Recipe
         {

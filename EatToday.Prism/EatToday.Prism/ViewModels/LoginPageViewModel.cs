@@ -29,7 +29,7 @@ namespace EatToday.Prism.ViewModels
             INavigationService navigationService,
             IApiService apiService) : base(navigationService)
         {
-            Title = "Login";
+            Title = Languages.Login;
             IsEnabled = true;
             IsRemember = true;
             _navigationService = navigationService;
@@ -106,7 +106,7 @@ namespace EatToday.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Email or Password incorrect.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorProblem, Languages.Accept);
                 Password = string.Empty;
 
                 IsRunning = false;
@@ -122,7 +122,7 @@ namespace EatToday.Prism.ViewModels
             var response3 = await _apiService.GetIngredientsAsync(url, "/api", "/Recipes/GetIngredients", "bearer", token.Token);
             if (!response3.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorProblem, Languages.Accept);
                 Password = string.Empty;
 
                 IsRunning = false;
@@ -141,7 +141,7 @@ namespace EatToday.Prism.ViewModels
             var response4 = await _apiService.GetCustomerByEmailAsync(url, "/api", "/Customers/GetCustomerByEmail", "bearer", token.Token, requestEmail);
             if (!response4.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "We have a big problem, sorry", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailIncorrect, Languages.Accept);
 
                 IsRunning = false;
                 IsEnabled = true;

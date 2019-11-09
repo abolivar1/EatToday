@@ -79,6 +79,15 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter an address..
+        /// </summary>
+        internal static string AddressError {
+            get {
+                return ResourceManager.GetString("AddressError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your address.
         /// </summary>
         internal static string AddressPlaceHolder {
@@ -133,11 +142,29 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email or Password incorrect..
+        /// </summary>
+        internal static string EmailIncorrect {
+            get {
+                return ResourceManager.GetString("EmailIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your email.
         /// </summary>
         internal static string EmailPlaceHolder {
             get {
                 return ResourceManager.GetString("EmailPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a valid email..
+        /// </summary>
+        internal static string EmailValidError {
+            get {
+                return ResourceManager.GetString("EmailValidError", resourceCulture);
             }
         }
         
@@ -151,11 +178,29 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We have a problem, sorry.
+        /// </summary>
+        internal static string ErrorProblem {
+            get {
+                return ResourceManager.GetString("ErrorProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         internal static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a firs name..
+        /// </summary>
+        internal static string FirstNameError {
+            get {
+                return ResourceManager.GetString("FirstNameError", resourceCulture);
             }
         }
         
@@ -169,7 +214,7 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forgot password.
+        ///   Looks up a localized string similar to Forgot password?.
         /// </summary>
         internal static string ForgotPassword {
             get {
@@ -210,6 +255,15 @@ namespace EatToday.Prism.Resources {
         internal static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a last name..
+        /// </summary>
+        internal static string LastNameError {
+            get {
+                return ResourceManager.GetString("LastNameError", resourceCulture);
             }
         }
         
@@ -259,11 +313,38 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        internal static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign Up.
         /// </summary>
         internal static string NotAccount {
             get {
                 return ResourceManager.GetString("NotAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password and confirm does not match..
+        /// </summary>
+        internal static string NotMatchPasswordError {
+            get {
+                return ResourceManager.GetString("NotMatchPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -286,6 +367,15 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a password confirm..
+        /// </summary>
+        internal static string PasswordConfirmError {
+            get {
+                return ResourceManager.GetString("PasswordConfirmError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your password confirm.
         /// </summary>
         internal static string PasswordConfirmPlaceHolder {
@@ -304,6 +394,15 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a password at least 6 character..
+        /// </summary>
+        internal static string PasswordMinimumError {
+            get {
+                return ResourceManager.GetString("PasswordMinimumError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your password.
         /// </summary>
         internal static string PasswordPlaceHolder {
@@ -318,6 +417,15 @@ namespace EatToday.Prism.Resources {
         internal static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a phone number..
+        /// </summary>
+        internal static string PhoneError {
+            get {
+                return ResourceManager.GetString("PhoneError", resourceCulture);
             }
         }
         

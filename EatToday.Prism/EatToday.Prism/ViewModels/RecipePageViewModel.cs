@@ -1,5 +1,6 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -32,7 +33,7 @@ namespace EatToday.Prism.ViewModels
             base.OnNavigatedTo(parameters);
 
             Recipe = JsonConvert.DeserializeObject<RecipeResponse>(Settings.Recipe);
-            Title = "Recipe";
+            Title = Languages.Recipe;
         }
     }
 }

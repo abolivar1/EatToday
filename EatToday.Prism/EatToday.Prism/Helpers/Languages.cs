@@ -67,9 +67,32 @@ namespace EatToday.Prism.Helpers
         public static string Profile => Resource.Profile;
         public static string GetIngredients => Resource.GetIngredients;
         public static string Logout => Resource.Logout;
+        public static string RecoverPassword => Resource.RecoverPassword;
+        public static string Ok => Resource.Ok;
+
+
+
+
 
         public static string PasswordConfirm => Resource.PasswordConfirm;
         public static string PasswordConfirmPlaceHolder => Resource.PasswordConfirmPlaceHolder;
+
+        //LoginPageViewModel
+        public static string ErrorProblem => Resource.ErrorProblem;
+        public static string EmailIncorrect => Resource.EmailIncorrect;
+        //MapPageViewModel
+        public static string Map => Resource.Map;
+
+        //RegisterPageViewModel
+        public static string FirstNameError => Resource.FirstNameError;
+        public static string LastNameError => Resource.LastNameError;
+        public static string AddressError => Resource.AddressError;
+        public static string EmailValidError => Resource.EmailValidError;
+        public static string PhoneError => Resource.PhoneError;
+        public static string PasswordMinimumError => Resource.PasswordMinimumError;
+        public static string PasswordConfirmError => Resource.PasswordConfirmError;
+        public static string NotMatchPasswordError => Resource.NotMatchPasswordError;
+
     }
 
 }

@@ -148,7 +148,7 @@
     <value>Recuérdame en este dispositivo</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>Olvidó la contraseña</value>
+    <value>¿Olvidó la contraseña?</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Iniciar sesión</value>
@@ -214,7 +214,7 @@
     <value>Introduzca su dirección</value>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>teléfono</value>
+    <value>Teléfono</value>
   </data>
   <data name="PhonePlaceHolder" xml:space="preserve">
     <value>Escribe tu número de teléfono</value>
@@ -242,5 +242,41 @@
   </data>
   <data name="RecoverPassword" xml:space="preserve">
     <value>Recuperar Contraseña</value>
+  </data>
+  <data name="ErrorProblem" xml:space="preserve">
+    <value>Tenemos gran problema, lo sentimos</value>
+  </data>
+  <data name="EmailIncorrect" xml:space="preserve">
+    <value>Correo o contraseña incorrectos</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="FirstNameError" xml:space="preserve">
+    <value>Debes introducir un nombre.</value>
+  </data>
+  <data name="LastNameError" xml:space="preserve">
+    <value>Debes escribir apellidos.</value>
+  </data>
+  <data name="AddressError" xml:space="preserve">
+    <value>Debe especificar una dirección.</value>
+  </data>
+  <data name="EmailValidError" xml:space="preserve">
+    <value>Debes introducir una dirección de correo válida.</value>
+  </data>
+  <data name="PhoneError" xml:space="preserve">
+    <value>Debes ingresar un número de teléfono.</value>
+  </data>
+  <data name="PasswordMinimumError" xml:space="preserve">
+    <value>Debe ingresar una contraseña de al menos 6 caracteres.</value>
+  </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>Debes ingresar la confirmación de contraseña.</value>
+  </data>
+  <data name="NotMatchPasswordError" xml:space="preserve">
+    <value>La nueva contraseña y la confirmación de contraseña no son iguales.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Aceptar</value>
   </data>
 </root>
