@@ -1,6 +1,7 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
 using EatToday.Common.Services;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Navigation;
@@ -109,24 +110,24 @@ namespace EatToday.Prism.ViewModels
         {
             if (string.IsNullOrEmpty(Customer.FirstName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a firstname", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.FirstNameError, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(Customer.LastName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a lastname", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.LastNameError, Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(Customer.Address))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a Address", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.AddressError, Languages.Accept);
                 return false;
             }
             if (string.IsNullOrEmpty(Customer.PhoneNumber))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a PhoneNumber", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.PhoneError, Languages.Accept);
                 return false;
             }
 

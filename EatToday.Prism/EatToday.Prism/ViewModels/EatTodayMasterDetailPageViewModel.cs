@@ -1,6 +1,7 @@
 ﻿using EatToday.Common.Models;
 using EatToday.Prism.ViewModels;
 using MyVet.Prism.ViewModels;
+using EatToday.Prism.Helpers;
 using Prism.Navigation;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,28 +29,28 @@ namespace EatToday.Prism.ViewModels
                 {
                     Icon = "ic_account_circle",
                     PageName = "ProfilePage",
-                    Title = "Profile"
+                    Title = Languages.Profile
                 },
 
                 new Menu
                 {
                     Icon = "ic_search",
                     PageName = "ChooseIngredientsPage",
-                    Title = "Search Recipes"
+                    Title = Languages.SearchRecipes
                 },
 
                 new Menu
                 {
                     Icon = "ic_near_me",
                     PageName = "MapPage",
-                    Title = "Get Ingredients"
+                    Title = Languages.GetIngredients
                 },
 
                 new Menu
                 {
                     Icon = "ic_exit_left",
                     PageName = "LoginPage",
-                    Title = "Logout"
+                    Title = Languages.Logout
                 }
             };
 

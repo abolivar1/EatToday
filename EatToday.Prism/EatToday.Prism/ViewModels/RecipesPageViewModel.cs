@@ -1,5 +1,6 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -18,7 +19,7 @@ namespace EatToday.Prism.ViewModels
         private ObservableCollection<RecipeItemViewModel> _recipes;
         public RecipesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Recipes";
+            Title = Languages.Recipes;
             _navigationService = navigationService;
             LoadRecipes();
         }

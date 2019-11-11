@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:i18n="clr-namespace:EatToday.Prism.Helpers"
              xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"             
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -17,12 +18,12 @@
                     TextColor="#FFB21C"
                     FontSize="50"
                     Margin="0,0,0,7"
-                    Text="Choose the ingredients now"/>
+                    Text="{i18n:Translate ChooseIngredients}"/>
                 <Label
                     TextColor="#FFB21C"
                     FontAttributes="Bold"
                     FontSize="Medium"
-                    Text="Ingredients"/>
+                    Text="{i18n:Translate Ingredients}"/>
                 <autocomplete:SfAutoComplete
                     x:Name="autoComplete"
                     DisplayMemberPath="Name" 
@@ -55,7 +56,7 @@
                     BorderRadius="30"  
                     IsEnabled="{Binding IsEnabled2}"
                     Command="{Binding SearchRecipesCommand}"                
-                    Text="Search Recipes"
+                    Text="{i18n:Translate SearchRecipes}"
                     VerticalOptions="EndAndExpand"
                     Clicked="searchRecipes"/>
             </StackLayout>

@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using EatToday.Prism.Helpers;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -11,7 +12,7 @@ namespace EatToday.Prism.ViewModels
     {
         public MapPageViewModel(INavigationService navigationservice): base (navigationservice)
         {
-            Title = "Map";
+            Title = Languages.Map;
         }
     }
 }
