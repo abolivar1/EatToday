@@ -67,7 +67,8 @@
                 	    Text="{Binding Customer.PhoneNumber}"/>
                 </Grid>
                 <StackLayout
-            	    Orientation="Horizontal">
+            	    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
                     <Button
                         TextColor="White"
                         BackgroundColor="#FFB21C"
