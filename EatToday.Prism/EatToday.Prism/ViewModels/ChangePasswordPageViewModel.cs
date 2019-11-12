@@ -1,6 +1,7 @@
 ﻿using EatToday.Common.Helpers;
 using EatToday.Common.Models;
 using EatToday.Common.Services;
+using EatToday.Prism.Helpers;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -27,7 +28,7 @@ namespace EatToday.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             IsEnabled = true;
-            Title = "Change Password";
+            Title = Languages.ChangePassword;
         }
 
         public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePassword));
@@ -105,36 +106,36 @@ namespace EatToday.Prism.ViewModels
             if (string.IsNullOrEmpty(CurrentPassword))
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter your current password",
-                    "Accept");
+                    Languages.Error,
+                    Languages.CurrentPasswordError,
+                    Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(NewPassword) || NewPassword?.Length < 6)
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a new password at least 6 characters length",
-                    "Accept");
+                    Languages.Error,
+                    Languages.PasswordMinimumError,
+                    Languages.Accept);
                 return false;
             }
 
             if (string.IsNullOrEmpty(PasswordConfirm))
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a password confirm",
-                    "Accept");
+                    Languages.Error,
+                    Languages.PasswordConfirmError,
+                    Languages.Accept);
                 return false;
             }
 
             if (!NewPassword.Equals(PasswordConfirm))
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "The new password and the confirmation does not match",
-                    "Accept");
+                    Languages.Error,
+                    Languages.NotMatchPasswordError,
+                    Languages.Accept);
                 return false;
             }
 

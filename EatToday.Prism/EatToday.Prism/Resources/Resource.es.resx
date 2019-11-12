@@ -279,4 +279,22 @@
   <data name="Ok" xml:space="preserve">
     <value>Aceptar</value>
   </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba la contraseña actual</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba su nueva contraseña</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Debe introducir su contraseña actual.</value>
+  </data>
 </root>

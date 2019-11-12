@@ -106,6 +106,15 @@ namespace EatToday.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check your internet connection.
         /// </summary>
         internal static string CheckInternet {
@@ -120,6 +129,33 @@ namespace EatToday.Prism.Resources {
         internal static string ChooseIngredients {
             get {
                 return ResourceManager.GetString("ChooseIngredients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current password.
+        /// </summary>
+        internal static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter your current password.
+        /// </summary>
+        internal static string CurrentPasswordError {
+            get {
+                return ResourceManager.GetString("CurrentPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your current password.
+        /// </summary>
+        internal static string CurrentPasswordPlaceHolder {
+            get {
+                return ResourceManager.GetString("CurrentPasswordPlaceHolder", resourceCulture);
             }
         }
         
@@ -318,6 +354,24 @@ namespace EatToday.Prism.Resources {
         internal static string Map {
             get {
                 return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        internal static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your new password.
+        /// </summary>
+        internal static string NewPasswordPlaceHolder {
+            get {
+                return ResourceManager.GetString("NewPasswordPlaceHolder", resourceCulture);
             }
         }
         

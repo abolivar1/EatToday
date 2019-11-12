@@ -93,6 +93,18 @@ namespace EatToday.Prism.Helpers
         public static string PasswordConfirmError => Resource.PasswordConfirmError;
         public static string NotMatchPasswordError => Resource.NotMatchPasswordError;
 
+        //ChangePasswordPage
+        public static string CurrentPassword => Resource.CurrentPassword;
+        public static string CurrentPasswordPlaceHolder => Resource.CurrentPasswordPlaceHolder;
+        public static string NewPassword => Resource.NewPassword;
+        public static string NewPasswordPlaceHolder => Resource.NewPasswordPlaceHolder;
+
+        //ChangePassordViewModel
+        public static string ChangePassword => Resource.ChangePassword;        
+        public static string CurrentPasswordError => Resource.CurrentPasswordError;
+
+
+
     }
 
 }
