@@ -28,7 +28,8 @@
                     FontSize="Body"
                     TextColor="#6B6B6B"
                     PlaceholderColor="#CCCCCC"                    
-                    Placeholder="{i18n:Translate  EmailPlaceHolder}"/>
+                    Placeholder="{i18n:Translate  EmailPlaceHolder}"
+                    Text="{Binding Email}"/>
                 <Label
                     TextColor="#6B6B6B"
                     FontSize="Body"            
@@ -39,7 +40,8 @@
                     FontSize="Body"
                     TextColor="#6B6B6B"
                     PlaceholderColor="#CCCCCC"          
-                    Placeholder="{i18n:Translate PasswordPlaceHolder}"/>
+                    Placeholder="{i18n:Translate PasswordPlaceHolder}"
+                    Text="{Binding Password}"/>
                 <Button
                     TextColor="White"
                     BackgroundColor="#FFB21C"
