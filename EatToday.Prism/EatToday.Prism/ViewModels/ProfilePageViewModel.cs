@@ -15,6 +15,7 @@ namespace EatToday.Prism.ViewModels
         private bool _isEnabled;
         private CustomerResponse _customer;
         private DelegateCommand _saveCommand;
+        private DelegateCommand _changePasswordCommand;
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
 
@@ -29,7 +30,7 @@ namespace EatToday.Prism.ViewModels
         }
 
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(Save));
-
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePassword));
         public CustomerResponse Customer
         {
             get => _customer;
@@ -47,6 +48,10 @@ namespace EatToday.Prism.ViewModels
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
         }
+        private async void ChangePassword()
+        {
+            await _navigationService.NavigateAsync("ChangePasswordPage");
+        }
 
         private async void Save()
         {
@@ -55,6 +60,50 @@ namespace EatToday.Prism.ViewModels
             {
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            var userRequest = new UserRequest
+            {
+                Address = Customer.Address,
+                Email = Customer.Email,
+                FirstName = Customer.FirstName,
+                LastName = Customer.LastName,
+                Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
+                Phone = Customer.PhoneNumber
+            };
+
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var response = await _apiService.PutAsync(
+                url,
+                "/api",
+                "/Account",
+                userRequest,
+                "bearer",
+                token.Token);
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "We have a big problem, sorry",
+                    "Accept");
+                return;
+            }
+
+            Settings.Customer = JsonConvert.SerializeObject(Customer);
+
+            await App.Current.MainPage.DisplayAlert(
+                "Ok",
+                "User updated succesfully!",
+                "Accept");
+
         }
 
         private async Task<bool> ValidateData()

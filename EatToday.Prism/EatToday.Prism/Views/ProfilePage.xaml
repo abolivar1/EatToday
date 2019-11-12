@@ -23,11 +23,15 @@
                 	    Grid.Row="0"
                 	    Grid.Column="0"
                         TextColor="Orange"
+                        FontSize="Body"
                 	    Text="{i18n:Translate FirstName}"
                 	    VerticalOptions="Center"/>
                     <Entry
                 	    Grid.Row="1"
                 	    Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
                 	    Placeholder="{i18n:Translate FirstNamePlaceHolder}"
                 	    Text="{Binding Customer.FirstName}"/>
 
@@ -35,11 +39,15 @@
                 	    Grid.Row="2"
                 	    Grid.Column="0"
                         TextColor="Orange"                    
+                        FontSize="Body"
                 	    Text="{i18n:Translate LastName}"
                 	    VerticalOptions="Center"/>
                     <Entry
                 	    Grid.Row="3"
                 	    Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
                 	    Placeholder="{i18n:Translate LastNamePlaceHolder}"
                 	    Text="{Binding Customer.LastName}"/>
 
@@ -47,28 +55,37 @@
                 	    Grid.Row="4"
                 	    Grid.Column="0"
                         TextColor="Orange"                    
+                        FontSize="Body"
                 	    Text="{i18n:Translate Address}"
                 	    VerticalOptions="Center"/>
                     <Entry
                 	    Grid.Row="5"
                 	    Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
                 	    Placeholder="{i18n:Translate AddressPlaceHolder}"
                 	    Text="{Binding Customer.Address}"/>
 
                     <Label
                 	    Grid.Row="6"
                 	    Grid.Column="0"
+                        FontSize="Body"
                 	    Text="{i18n:Translate Phone}"
                         TextColor="Orange"                    
                 	    VerticalOptions="Center"/>
                     <Entry
                 	    Grid.Row="7"
                 	    Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
                 	    Placeholder="{i18n:Translate PhonePlaceHolder}"
                 	    Text="{Binding Customer.PhoneNumber}"/>
                 </Grid>
                 <StackLayout
-            	    Orientation="Horizontal">
+            	    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
                     <Button
                         TextColor="White"
                         BackgroundColor="#FFB21C"

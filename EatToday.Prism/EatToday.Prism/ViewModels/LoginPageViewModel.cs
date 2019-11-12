@@ -35,9 +35,6 @@ namespace EatToday.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
 
-            //TODO: Delete this lines
-            Email = "juanmartinez1712@gmail.com";
-            Password = "123456";
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
