@@ -15,7 +15,6 @@ namespace EatToday.Prism.ViewModels
     public class RecipesPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private  RecipeResponse _recipe;
         private ObservableCollection<RecipeItemViewModel> _recipes;
         public RecipesPageViewModel(INavigationService navigationService) : base(navigationService)
         {

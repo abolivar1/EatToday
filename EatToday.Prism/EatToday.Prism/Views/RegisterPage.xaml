@@ -23,42 +23,58 @@
                     <Label
                     	Grid.Row="0"
                     	Grid.Column="0"
+                        FontSize="Body"
                     	Text="{i18n:Translate FirstName}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
                     	Grid.Row="1"
                     	Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate FirstNamePlaceHolder}"
                     	Text="{Binding FirstName}"/>
 
                     <Label
                     	Grid.Row="2"
                     	Grid.Column="0"
+                        FontSize="Body"
                     	Text="{i18n:Translate LastName}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
                     	Grid.Row="3"
                     	Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate LastNamePlaceHolder}"
                     	Text="{Binding LastName}"/>
 
                     <Label
                     	Grid.Row="4"
                     	Grid.Column="0"
+                        FontSize="Body"
                     	Text="{i18n:Translate Address}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
                     <Entry
                     	Grid.Row="5"
                     	Grid.Column="0"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate AddressPlaceHolder}"
                     	Text="{Binding Address}"/>
 
                     <Label
                     	Grid.Row="6"
                     	Grid.Column="0"
+                        FontSize="Body"
                     	Text="{i18n:Translate Email}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
@@ -66,12 +82,17 @@
                     	Grid.Row="7"
                     	Grid.Column="0"
                     	Keyboard="Email"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate EmailPlaceHolder}"
                     	Text="{Binding Email}"/>
 
                     <Label
                     	Grid.Row="8"
                     	Grid.Column="0"
+                        FontSize="Body"
                     	Text="{i18n:Translate Phone}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
@@ -79,12 +100,17 @@
                     	Grid.Row="9"
                     	Grid.Column="0"
                         Keyboard="Telephone"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate PhonePlaceHolder}"
                     	Text="{Binding Phone}"/>
 
                     <Label
                     	Grid.Row="10"
                     	Grid.Column="0"
+                        FontSize="Body"                        
                     	Text="{i18n:Translate Password}"
                         TextColor="Orange"
                     	VerticalOptions="Center"/>
@@ -92,6 +118,10 @@
                     	Grid.Row="11"
                     	Grid.Column="0"
                     	IsPassword="True"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate Password}"
                     	Text="{Binding Password}"/>
 
@@ -100,11 +130,16 @@
                     	Grid.Column="0"
                     	Text="{i18n:Translate PasswordConfirm}"
                         TextColor="Orange"
+                        FontSize="Body"
                     	VerticalOptions="Center"/>
                     <Entry
                     	Grid.Row="13"
                     	Grid.Column="0"
                     	IsPassword="True"
+                        FontSize="Body"
+                        TextColor="#6B6B6B"
+                        PlaceholderColor="#CCCCCC"
+                        VerticalOptions="Center"
                     	Placeholder="{i18n:Translate PasswordConfirmPlaceHolder}"
                     	Text="{Binding PasswordConfirm}"/>
                     <Grid.RowDefinitions>
@@ -124,15 +159,14 @@
                     </Grid.RowDefinitions>
                 </Grid>
                 <Button
-                    BorderColor="Orange"
-                    TextColor="Orange"
-                    BackgroundColor="White"
-                    BorderWidth="2"
-                    BorderRadius="10"
+                    TextColor="White"
+                    BackgroundColor="#FFB21C"
+                    BorderWidth="2" 
+                    BorderRadius="30"
+                    VerticalOptions="EndAndExpand"
                 	Command="{Binding RegisterCommand}"
                 	IsEnabled="{Binding IsEnabled}"
-                	Text="{i18n:Translate Register}"
-                	VerticalOptions="EndAndExpand"/>
+                	Text="{i18n:Translate Register}"/>
             </StackLayout>
             <busyindicator:SfBusyIndicator  
             	AnimationType="RollingBall"

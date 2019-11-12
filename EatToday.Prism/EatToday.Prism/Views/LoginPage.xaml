@@ -14,43 +14,43 @@
             	AbsoluteLayout.LayoutFlags="All"
                 Padding="15">
                 <Image
-                HeightRequest="150"
-                HorizontalOptions="FillAndExpand"
-                BackgroundColor="Transparent"
-                Source="logoeat"/>
+                    HeightRequest="150"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="Transparent"
+                    Source="logoeat"/>
                 <Label
-                TextColor="#6B6B6B"
-                FontSize="Body"
-                HorizontalOptions="Start"          
-                Text="{i18n:Translate User}"/>
+                    TextColor="#6B6B6B"
+                    FontSize="Body"
+                    HorizontalOptions="Start"          
+                    Text="{i18n:Translate User}"/>
                 <Entry
-                Keyboard="Email"
-                FontSize="Body"
-                TextColor="#6B6B6B"
-                PlaceholderColor="#CCCCCC"                    
-                Placeholder="{i18n:Translate  EmailPlaceHolder}"/>
+                    Keyboard="Email"
+                    FontSize="Body"
+                    TextColor="#6B6B6B"
+                    PlaceholderColor="#CCCCCC"                    
+                    Placeholder="{i18n:Translate  EmailPlaceHolder}"/>
                 <Label
-                TextColor="#6B6B6B"
-                FontSize="Body"            
-                HorizontalOptions="Start"
-                Text="{i18n:Translate Password}"/>
+                    TextColor="#6B6B6B"
+                    FontSize="Body"            
+                    HorizontalOptions="Start"
+                    Text="{i18n:Translate Password}"/>
                 <Entry
-                IsPassword="True"
-                FontSize="Body"
-                TextColor="#6B6B6B"
-                PlaceholderColor="#CCCCCC"          
-                Placeholder="{i18n:Translate PasswordPlaceHolder}"/>
+                    IsPassword="True"
+                    FontSize="Body"
+                    TextColor="#6B6B6B"
+                    PlaceholderColor="#CCCCCC"          
+                    Placeholder="{i18n:Translate PasswordPlaceHolder}"/>
                 <Button
-                TextColor="White"
-                BackgroundColor="#FFB21C"
-                BorderWidth="2" 
-                BorderRadius="30"                
-                IsEnabled="{Binding IsEnabled}"
-                Command="{Binding LoginCommand}"
-                Text="{i18n:Translate Login}"/>
+                    TextColor="White"
+                    BackgroundColor="#FFB21C"
+                    BorderWidth="2" 
+                    BorderRadius="30"                
+                    IsEnabled="{Binding IsEnabled}"
+                    Command="{Binding LoginCommand}"
+                    Text="{i18n:Translate Login}"/>
                 <StackLayout
-	            HorizontalOptions="Center"
-	            Orientation="Horizontal">
+	                HorizontalOptions="Center"
+	                Orientation="Horizontal">
                     <Label
                         TextColor="#FFB21C"
                         FontSize="Body"
@@ -60,15 +60,15 @@
     	                IsChecked="{Binding IsRemember}"/>
                 </StackLayout>
                 <StackLayout
-	            Orientation="Horizontal">
+	                Orientation="Horizontal">
                     <Label 
                     HorizontalOptions="Start">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{i18n:Translate NotAccount}"
-                            TextColor="#FFB21C"
-                            TextDecorations="Underline"
-                            FontSize="Body">
+                                TextColor="#FFB21C"
+                                TextDecorations="Underline"
+                                FontSize="Body">
                                     <Span.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
                                     </Span.GestureRecognizers>
@@ -77,29 +77,29 @@
                         </Label.FormattedText>
                     </Label>
                     <Label
-	                HorizontalOptions="EndAndExpand"
-	                Text="{i18n:Translate ForgotPassword}"
-	                FontSize="Body"
-                    TextColor="#FFB21C"
-                    TextDecorations="Underline">
+	                    HorizontalOptions="EndAndExpand"
+	                    Text="{i18n:Translate ForgotPassword}"
+	                    FontSize="Body"
+                        TextColor="#FFB21C"
+                        TextDecorations="Underline">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <StackLayout
-                VerticalOptions="EndAndExpand"
-	            Orientation="Horizontal">
+                    VerticalOptions="EndAndExpand"
+	                Orientation="Horizontal">
                     <Label
-                    TextColor="#BDBDBD"
-                    FontSize="Caption"
-                    HorizontalOptions="Start"          
-                    Text="{i18n:Translate Rights}"/>
+                        TextColor="#BDBDBD"
+                        FontSize="Caption"
+                        HorizontalOptions="Start"          
+                        Text="{i18n:Translate Rights}"/>
                     <Label
-                    TextColor="#BDBDBD"
-                    FontSize="Caption"
-                    HorizontalOptions="EndAndExpand"          
-                    Text="2019"/>
+                        TextColor="#BDBDBD"
+                        FontSize="Caption"
+                        HorizontalOptions="EndAndExpand"          
+                        Text="2019"/>
                 </StackLayout>
 
             </StackLayout>
