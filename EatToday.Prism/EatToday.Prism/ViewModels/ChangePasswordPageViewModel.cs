@@ -86,16 +86,16 @@ namespace EatToday.Prism.ViewModels
             if (!response.IsSuccess)
             {
                 await App.Current.MainPage.DisplayAlert(
-                    "Error",
+                    Languages.Error,
                     response.Message,
-                    "Accept");
+                    Languages.Accept);
                 return;
             }
 
             await App.Current.MainPage.DisplayAlert(
-                "Ok",
+                Languages.Ok,
                 response.Message,
-                "Accept");
+                Languages.Accept);
 
             await _navigationService.GoBackAsync();
 
